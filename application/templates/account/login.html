@@ -1,0 +1,103 @@
+{% load static %}
+{% include "structure/header.html" %}
+
+<style>
+    #ekahofi {
+        background-image: url('{% static "assets/img/claudine-background.jpeg" %}');
+        background-repeat: round;
+        opacity: 0.6;
+        position: absolute;
+        width: 100%;
+        height: 50%;
+    }
+</style>
+
+<body>
+    <div id="ekahofi"></div>
+    <main>
+        <div class="container">
+            <section
+                class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                            <div class="card mb-3">
+
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-center py-4">
+                                        <a href="{% url 'index' %}" class="logo d-flex align-items-center w-auto">
+                                            <img src=" {% static 'assets/img/logoApp.png' %}" alt="">
+                                            <span class="d-lg-block" style="color:#433334">EKA YO HOFI</span>
+                                        </a>
+                                    </div><!-- End Logo -->
+                                    <div class="pt-0 pb-2">
+                                        <h5 class="card-title text-center pb-0 fs-4">Connectez-vous</h5>
+                                    </div>
+
+                                    {% if error_message %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <i class="bi bi-exclamation-octagon me-1"></i>
+                                        {{error_message}}
+                                    </div>
+                                    {% endif %}
+                                    <form method="post" class="row g-3 needs-validation" novalidate>
+                                        {% csrf_token %}
+                                        <div class="col-12">
+                                            <label for="yourUsername" class="form-label">Nom d'utilisateur</label>
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                                <input type="text" name="username" class="form-control"
+                                                    id="yourUsername" required>
+                                                <div class="invalid-feedback">SVP Entrer le nom d'utilisateur.</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="yourPassword" class="form-label">Mot de passe</label>
+                                            <input type="password" name="password" class="form-control"
+                                                id="yourPassword" required>
+                                            <div class="invalid-feedback">Please enter your password!</div>
+                                        </div>
+
+                                        <style>
+                                            .loginuserBtn:hover { 
+                                                color: yellow;
+                                            }
+                                        </style>
+                                        <div class="col-12">
+                                            <button style="background-color:#433334"
+                                                class="btn btn-primary w-100 loginuserBtn" type="submit">Login</button>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <p class="small mb-0">Voulez vous creer un compte? <a
+                                                    href="{% url 'signup' %}">Creer un
+                                                    compte</a></p>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copyright">
+                    &copy; Copyright <strong><span>All Rights Reserved
+                </div>
+                <div class="credits">
+                    EKA YE HOFI
+                </div>
+            </section>
+
+        </div>
+    </main><!-- End #main -->
+
+    {% include "structure/footer-page.html" %}
+    {% include "structure/import-scripts.html" %}
+
+</body>
+
+</html>

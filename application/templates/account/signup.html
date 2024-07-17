@@ -1,0 +1,207 @@
+{% load static %}
+{% include "structure/header.html" %}
+<style>
+    #ekahofi {
+        background-image: url('{% static "assets/img/claudine-background.jpeg" %}');
+        background-repeat: round;
+        opacity: 0.6;
+        position: absolute;
+        width: 100%;
+        height: 50%;
+    }
+</style>
+
+<body>
+    <div id="ekahofi"></div>
+    <main>
+        <div class="container">
+            <section
+                class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div
+                            class="col-lg-6 col-md-9 col-9 d-flex flex-column align-items-center justify-content-center">
+
+                            <div class="d-flex justify-content-center py-4" style="z-index: 10000;">
+                                <a href="{% url 'index' %}" class="logo d-flex align-items-center w-auto">
+                                    <img src="assets/img/logoApp.png" alt="">
+                                    <span class="d-lg-block" style="color:#2c2324">EKA YO HOFI</span>
+                                </a>
+                            </div><!-- End Logo -->
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="pt-4 pb-2">
+                                        <h5 class="card-title text-center pb-0 fs-4" style="color:#2c2324">Creer un
+                                            compte</h5>
+                                        <p class="text-center small">En creant un compte sur cette plateforme, vous
+                                            pouvez avoir l'idee sur
+                                            l'action de la plateforme</p>
+                                    </div>
+
+                                    <form id="signup-form" method="post" class="row g-3 needs-validation">
+                                        <div class="col-12">
+                                            <label for="yourName" class="form-label">Nom et post-nom</label>
+                                            <input type="text" name="name" class="form-control" id="yourName" required>
+                                            <div class="invalid-feedback">SVP Entrez votre nom ici</div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="province" class="form-label">Ta province</label>
+                                            <select class="form-select" name="province" id="province" required>
+                                                <option value="Sud-Kivu">Sud-Kivu</option>
+                                                <option value="Nord-Kivu">Nord-Kivu</option>
+                                                <option value="Ituri">Ituri</option>
+                                                <option value="Kasai-Central">Kasai-Central</option>
+                                                <option value="Kasai-Oriental">Kasai-Oriental</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="city" class="form-label">Ville/Territoire</label>
+                                            <select class="form-select" name="city" id="city" required>
+                                                <option value="Bukavu">Bukavu</option>
+                                                <option value="Goma">Goma</option>
+                                                <option value="Kabare">Kabare</option>
+                                                <option value="Mwenga">Mwenga</option>
+                                                <option value="Fizi">Fizi</option>
+                                                <option value="Walungu">Walungu</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="role" class="form-label">Quel est le votre role dans
+                                                l'organisation ?</label>
+                                            <select class="form-select" name="role" id="role" required>
+                                                <option value="Superviseur">Superviseur</option>
+                                                <option value="Point Focal">Point Focal</option>
+                                                <option value="Membre">Membre</option>
+                                                <option value="Partisan">Partisan</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="yourEmail" class="form-label">Adresse Mail</label>
+                                            <input type="email" name="email" class="form-control" id="yourEmail"
+                                                required>
+                                            <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="yourPassword" class="form-label">Mot de passe</label>
+                                            <input type="password" name="password" class="form-control"
+                                                id="yourPassword" required>
+                                            <div class="invalid-feedback">Enter votre mot de passe par defaut</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="terms" type="checkbox"
+                                                    value="accepted" id="acceptTerms" required>
+                                                <label class="form-check-label" for="acceptTerms">
+                                                    <a style="color: blue;" href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#basicModal">J'accepte les termes de contrat</a>
+                                                </label>
+                                                <div class="invalid-feedback">Vous devez acceptez avant de creeer votre
+                                                    compte.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100" style="background-color:#2c2324"
+                                                type="submit">Create un compte</button>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="small mb-0">As tu deja un compte? <a href="{% url 'login' %}">Log
+                                                    in</a></p>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                            <div class="copyright">
+                                &copy; Copyright <strong><span>All Rights Reserved
+                            </div>
+                            <div class="credits">
+                                EKA YE HOFI
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="card">
+                <div class="card-body">
+                    <div class="modal fade" id="basicModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Regles d'utilisation de la plateforme</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" style="font-size: medium;">
+                                    <p class="style" style="font-size: medium; font-weight: 400;">
+                                        Cette plateforme n'ayant pas participe dans les crimes contre l'humanité; ayant
+                                        une
+                                        moralité acceptable peut créer son compte. De ce fait tout envoie données dont
+                                        la
+                                        nature est dordre à salur soit la province ou le pays peuvent etre sujets de
+                                        poursuite.
+                                        Cette plateforme n'ayant pas participe dans les crimes contre l'humanité; ayant
+                                        une
+                                        moralité acceptable peut créer son compte. De ce fait tout envoie données dont
+                                        la
+                                        nature est dordre à salur soit la province ou le pays peuvent etre sujets de
+                                        poursuite.
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Refuser</button>
+                                    <button type="button" class="btn btn-primary">Accépter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Basic Modal-->
+
+                </div>
+            </div>
+
+        </div>
+    </main><!-- End #main -->
+    {% include "structure/footer-page.html" %}
+    {% include "structure/import-scripts.html" %}
+    <script>
+        $(document).ready(function () {
+            $('#signup-form').on('submit', function (event) {
+                event.preventDefault()
+                var formData = {
+                    name: $('#yourName').val(),
+                    province: $('#province').val(),
+                    city: $('#city').val(),
+                    role: $('#role').val(),
+                    email: $('#yourEmail').val(),
+                    password: $('#yourPassword').val(),
+                };
+                $.ajax({
+                    url: "{% url 'signup' %}",
+                    type: 'POST',
+                    data: JSON.stringify(formData),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    success: function (response) {
+                        $('#yourName').val('');
+                        $('#province').val('Sud-Kivu');
+                        $('#city').val('Bukavu');
+                        $('#role').val('');
+                        $('#yourEmail').val('');
+                        $('#yourPassword').val('');
+                        alert(response.message);
+                    },
+                    error: function (response) {
+                        alert(response.responseJSON.message)
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+<html>

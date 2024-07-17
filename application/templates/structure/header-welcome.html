@@ -1,0 +1,303 @@
+{% load static %}
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="{% url 'index' %}" class="logo d-flex align-items-center">
+            <img src="{% static 'assets/img/logoApp.png' %} " alt="">
+            <span class="d-none d-lg-block">EKA YO HOFI</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+        <form class="search-form d-flex align-items-center" method="POST" action="#">
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge bg-primary badge-number">3</span>
+                </a><!-- End Notification Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                    <li class="dropdown-header">
+                        Vous avez 3 notification
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Voir tous</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-exclamation-circle text-warning"></i>
+                        <div>
+                            <h4>Collecte des données</h4>
+                            <p>Les données de mwenga viennent d'arriver</p>
+                            <p>30 min. déjà</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-x-circle text-danger"></i>
+                        <div>
+                            <h4>Intervention</h4>
+                            <p>Une intervention a été réalisée</p>
+                            <p>1 hr. déjà</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-alarm" style="color: rgb(151, 33, 33);"></i>
+                        <div>
+                            <h4>Dossier grave femme</h4>
+                            <p>Une femme inscrit parmis le cas à risques a été enregistree </p>
+                            <p>2 hrs. déjà</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li class="dropdown-footer">
+                        <a href="#">Voir tous les notifications</a>
+                    </li>
+
+                </ul><!-- End Notification Dropdown Items -->
+
+            </li><!-- End Notification Nav -->
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-chat-left-text"></i>
+                    <span class="badge bg-success badge-number">2</span>
+                </a><!-- End Messages Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                    <li class="dropdown-header">
+                        Vous avez 2 messages
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="{% static 'assets/img/christiansphoto.jpg' %} " alt="" class="rounded-circle">
+                            <div>
+                                <h4>Christian Byabushi</h4>
+                                <p>Tu devrais nous envoyer tous les rapports à partir de demain...</p>
+                                <p>4 heures. déjà</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="  assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Luc Murhandikire</h4>
+                                <p>Nous vous devons un peu d'argent pour le financement des mamans de Kagabi mais nous
+                                    te prions de
+                                    patienter</p>
+                                <p>6 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li class="dropdown-footer">
+                        <a href="#">Voir tous les messages</a>
+                    </li>
+
+                </ul><!-- End Messages Dropdown Items -->
+            </li><!-- End Messages Nav -->
+
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="{% static 'assets/img/imageNdusi.jpeg' %}"
+                        style="width: 30px; height: 35px;max-width: 30px; max-height: 35px;" alt="Profile"
+                        class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-1"></span>
+                </a><!-- End Profile Iamge Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>Hon. Claudine Ndusi</h6>
+                        <span>Superviseur(se)</span>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <i class="bi bi-person"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <i class="bi bi-gear"></i>
+                            <span>Commpte Reglages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                            <i class="bi bi-question-circle"></i>
+                            <span>Besoin d'aide?</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Déconnecter</span>
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+            <a class="nav-link " href="{% url 'index' %}">
+                <i class="bi bi-grid"></i>
+                <span>Tabeau de bord</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
+                href="{% url 'collectiondata' %}">
+                <i class="bi bi-menu-button-wide"></i><span>Collecte-Données</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{% url 'women'  %}">
+                        <i class="bi bi-circle"></i><span>Femmes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'dons' %}">
+                        <i class="bi bi-circle"></i><span>Dons</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'crimes' %}">
+                        <i class="bi bi-circle"></i><span>Crimes</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Components Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url 'agentAmis' %}">
+                <i class="bi bi-person"></i>
+                <span>Agents</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+        <li class="nav-heading">Interventions</li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url 'assistances' %}">
+                <i class="bi bi-bag-fill"></i>
+                <span>Assistances</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-contact.html">
+                <i class="bi bi-envelope"></i>
+                <span>Messagerie</span>
+            </a>
+        </li><!-- End Contact Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="users-profile.html">
+                <i class="bi bi-receipt"></i>
+                <span>Rapports</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+        <li class="nav-heading">Autres</li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url 'boiteSuggestion' %}">
+                <i class="bi bi-box-arrow-down"></i>
+                <span>Boites a suggestion</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url 'faq' %}">
+                <i class="bi bi-question-circle"></i>
+                <span>F.A.Q</span>
+            </a>
+        </li><!-- End F.A.Q Page Nav -->
+
+
+        <li class="nav-item">
+            {% if user %}
+            <form id="logout-form" action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button class="bg-white nav-link collapsed" type="submit"><i class="bi bi-box-arrow-in-left"></i>
+                    <span>Logout</span></button>
+            </form>
+            {% else %}
+            <a class="nav-link collapsed" href="{% url 'login' %}">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>Se connecter</span>
+            </a>
+            {% endif %}
+
+        </li><!-- End Login Page Nav -->
+    </ul>
+
+</aside><!-- End Sidebar-->
