@@ -1,0 +1,107 @@
+{% extends "../structure/base.html" %}
+
+{% block content %}
+<style>
+    main {
+        min-height: 550px;
+    }
+</style>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Collecte des données</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard" style="min-height: 500px;">
+        <div class="row"> 
+            <div class="">
+                <!-- Bordered Tabs  Justified -->
+                <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+                    <li class="nav-item flex-fill" role="presentation">
+
+                        <button
+                            class="nav-link w-100 {% if request.resolver_match.url_name == 'femme' %}active{% endif %}"
+                            id="femme-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-femme" type="button"
+                            role="tab" aria-controls="home" aria-selected="false">Femmes</button>
+                    </li>
+                    <li class="nav-item flex-fill" role="presentation">
+                        <button
+                            class="nav-link w-100 {% if request.resolver_match.url_name == 'problems' %}active{% endif %}"
+                            id="problem-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-profile"
+                            type="button" role="tab" aria-controls="profile" aria-selected="true">Problèmes</button>
+                    </li>
+
+                    <li class="nav-item flex-fill" role="presentation">
+                        <button
+                            class="nav-link w-100 {% if request.resolver_match.url_name == 'actions' %}active{% endif %}"
+                            id="action-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-action"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">Actions</button>
+                    </li>
+                </ul>
+
+                <style>
+                    #bordered-justified-femme {
+                        background-color: white;
+                        border-radius: 5px 5px;
+                        padding: 5px 10px 10px 5px;
+                    }
+
+                    #bordered-justified-femme .card {
+                        border: 1px solid;
+                        border-radius: 0px 0px 0px 0px;
+                    }
+
+                    #bordered-justified-femme .card a:hover {
+                        background-color: #c7c7c3;
+                        color: white;
+                    }
+
+                    #bordered-justified-femme .card img {
+                        min-width: 100%;
+                        max-width: 60px;
+                        min-height: 150px;
+                        max-height: 150px;
+                        border-radius: 0px 0px;
+                    }
+
+                    #borderedTabJustifiedContent button {
+                        color: #4e341e;
+                        border: #4e341e 1px solid;
+                        border-radius: .3rem;
+
+                    }
+
+                    @media (max-width: 768px) {
+                        #bordered-justified-femme .card img {
+                            min-width: 100%;
+                            max-width: 60px;
+                            min-height: 210px;
+                            max-height: 210px;
+                        }
+
+                        #borderedTabJustifiedContent button {
+                            margin-bottom: 3px;
+
+                        }
+                    }
+                </style>
+                <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+
+                    <!-- Specific Femmes-->
+                    {% include "./femmes.html" %}
+
+
+
+                    <!-- TAB PROBLEMS -->
+                    {% include "./problems.html" %}
+
+
+                    <!-- TAB ACTION-TAB -->
+                    {% include "./actions.html" %}
+                </div>
+            </div>
+    </section>
+
+</main><!-- End #main -->
+
+
+{% endblock %}

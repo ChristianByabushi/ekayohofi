@@ -1,0 +1,558 @@
+{% extends "../structure/base.html" %}
+{% block content %}
+<style>
+    main {
+        min-height: 550px;
+    }
+</style>
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1 style="color: rgb(121, 102, 49); font-size:x-large;">Collecte des données</h1>
+    </div>
+    <section class="section dashboard p-2" style="min-height: 500px;">
+        <div class="row d-flex align-content-center justify-content-center text-center">
+            <div class="col-12">
+                <h2 class="bold">Femmes</h2>
+            </div>
+        </div>
+        <div class="header-femme-content">
+            <div class="row pt-3">
+                <div class="col-lg-1 col-md-4 col-sm-3 col-2">
+                    <button type="button" style=" border: none; background-color:inherit" class=""
+                        data-bs-toggle="modal" data-bs-target="#addCaseWomenModal"><i class="bi bi-plus-circle-fill"
+                            style="font-size: 30px;">
+                        </i></button>
+                </div>
+                <div class="col-lg-4 d-flex col-md-8 col-sm-9 col-8  my-2">
+                    <div class="row d-flex">
+                        <div class="col-sm-6 col-12 d-flex">
+                            <label class="d-inline m-2" for="caseWomenTo">Du</label>
+
+                            <input class=" gap-0 form-control shadow-none" type="date" id="caseWomenFrom">
+                            </input>
+                        </div>
+                        <div class="col-sm-6 col-12 d-flex">
+                            <label class="d-inline m-2" for="caseWomenTo">Au</label>
+                            <input class="m-0 gap-0 form-control shadow-none small" type="date" id="caseWomenTo">
+                            </input>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mt-sm-2 col-sm-6 col-6 ">
+                    <select class="form-select shadow-none" aria-label="Default select example">
+                        <option selected>Aujourdhui</option>
+                        <option value="2">Jour</option>
+                        <option value="2">Semaine</option>
+                        <option value="2">Mois</option>
+                        <option value="3">Year</option>
+                    </select>
+                </div>
+                {% if is_supervisor %}
+                <div class="col-lg-3 col-6 pb-1 mt-sm-2 text-dark">
+                    <select class="form-select shadow-none" name="userCollector" id="userCollector"
+                        onchange="updateFemmesList()">
+                        <option value="">Select. Collecteur</option>
+                        <option value="">Tous les collecteurs</option>
+                        {% for userCollecteur in Allusers %}
+                        <option value="{{ userCollecteur.id }}">{{userCollecteur.id}}#{{ userCollecteur.first_name }},
+                            axe :
+                            {{userCollecteur.city}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
+                <script>
+                    function updateFemmesList() {
+                        var userCollector = $('#userCollector').val();
+                        var url = new URL(window.location.href);
+                        url.searchParams.set('userCollector', userCollector);
+                        window.location.href = url.toString();
+                    }
+                </script>
+
+                <div class="col-lg-2 col-md-6 col-sm-6 col-6 mt-sm-2">
+                    <select class="form-select shadow-none" aria-label="Default select example">
+                        <option selected>Select. Axe</option>
+                        <option value="6">Sud-Kivu</option>
+                        <option value="1">Nord-Kivu</option>
+                        <option value="2">Ituri</option>
+                        <option value="3">Kasai-Central</option>
+                        <option value="3">Kasai-Oriental</option>
+                    </select>
+                </div>
+
+                <style>
+                    .report-case.card a span {
+                        color: blue;
+                    }
+
+                    .report-case.card:hover {
+                        color: blue;
+                    }
+
+                    .femmeImage {
+                        padding: 5px 5px;
+                        width: 100%;
+                        max-width: 100%;
+                        max-height: 250px;
+                        height: 250px;
+                    }
+
+                    @media (max-width: 768px) {
+                        .femmeImage {
+                            padding: 5px 5px;
+                            width: 100%;
+                            max-width: 100%;
+                            max-height: 350px;
+                            height: 350px;
+                        }
+                    }
+                </style>
+            </div>
+            <div class="row mt-2 mr-0">
+
+                {% if selected_user_object %}
+                <h5 class="mytitles text-center">Données collectees par {{selected_user_object.title}}
+                    {{selected_user_object.first_name}}</h5>
+                {% endif %}
+
+                {% for item in femmesEntries %}
+                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="shadow-none card">
+                        <img src="{{ item.get_image_url }}" class="card-img-top femmeImage"
+                            alt="Image of {{ item.titleCase }}">
+                        <div class="card-body">
+                            <h5 class="card-text">{{ item.titleCase }}</h5>
+                            <p class="text-dark">
+                                {{ item.descriptionCasFemme }}
+                                <span> Voir plus ... </span>
+                            </p>
+                            <style>
+                                a .voir-details {
+                                    color: blue;
+                                }
+
+                                a:hover,
+                                .card-text {
+                                    color: rgb(121, 102, 49);
+                                    ;
+                                }
+                            </style>
+                            <a href="#" data-bs-toggle="offcanvas" data-bs-target="#showDetailAction{{ item.id }}"
+                                aria-controls="showDetailAction{{ item.id }}" style="color: black;"> <span
+                                    class="voir-details">
+                                    Voir Détails
+
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="showDetailAction{{ item.id }}"
+                        aria-labelledby="offcanvasRightLabel{{ item.id }}">
+                        <div class="offcanvas-header">
+                            <h5 id="offcanvasRightLabel{{ item.id }}" class="mytitles">Femme Details</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <div class="card w-100 m-0 p-0">
+                                <div class="card-header">
+                                    <span class="text-black"> {{ item.titleCase }}</span>
+                                    <div>Cas:<span class="small"> {{item.name_femme}}</span></div>
+                                </div>
+                                <div class="card-body">
+                                    <img src="{{ item.get_image_url }}" class="card-img-top femmeImage"
+                                        alt="Image of {{ item.titleCase }}">
+                                    <div class="card-text">
+                                        {{ item.descriptionCasFemme }}
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="text-black text-decoration-underline"> Autres informations
+                                                :</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-12">Numero de Telephone:
+                                                    <span>{{ item.numero_tel_femme }}</span>
+                                                </div>
+                                                <div class="col-12">Age:
+                                                    <span>{{ item.age_femme }}</span>
+                                                </div>
+                                                <div class="col-12">Genre du probleme:
+                                                    <span>{{ item.genreProbleme }}</span>
+                                                </div>
+                                                <div class="col-12">Niveau de scolarité:
+                                                    <span>{{ item.scolarite_femme }}</span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-2">
+                                    Réalisé par : {{ user.title }} {{ user.first_name }}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+            <nav aria-label="Page navigation example" class="d-flex align-center justify-content-center mt-3">
+                <ul class="pagination">
+                    {% if femmesEntries.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ femmesEntries.previous_page_number }}"
+                            aria-label="Previous">
+                            <span aria-hidden="true">&laquo; Previous</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-hidden="true">&laquo; Previous</span>
+                    </li>
+                    {% endif %}
+
+                    {% for num in femmesEntries.paginator.page_range %}
+                    {% if femmesEntries.number == num %}
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                    {% elif num > femmesEntries.number|add:'-3' and num < femmesEntries.number|add:'3' %} <li
+                        class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if femmesEntries.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ femmesEntries.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">Next &raquo;</span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link" aria-hidden="true">Next &raquo;</span>
+                        </li>
+                        {% endif %}
+                </ul>
+            </nav><!-- End Basic Pagination -->
+
+        </div>
+
+        <!-- Modal add Women data-->
+        <div class="modal fade" id="addCaseWomenModal" tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header bg-light d-flex align-content-around">
+                        <button class="btn bg-white" style="width: 4rem;" data-bs-dismiss="modal">
+                            <i class="bi bi-arrow-left"></i>
+                        </button>
+                        <h5 class="modal-title mx-2 my-md-0">
+                            Ajouter un cas d'une femme </h5>
+                        <button id="submitAllForms" type="button" class="btn" disabled> <i
+                                class="bi bi-check-circle "></i>
+                            Enregistrer</button>
+                    </div>
+
+                    <style>
+                        #submitAllForms:hover {
+                            background-color: rgb(121, 102, 49);
+                            color: white;
+                        }
+
+                        #submitAllForms {
+                            color: black;
+                            border: 2px solid rgb(121, 102, 49);
+                        }
+
+                        .activity-content {
+                            text-align: start;
+
+                        }
+                    </style>
+                    <div class="modal-body" style="color:black; border: none;">
+                        <div class="row d-flex">
+                            <div class="col-12 order-2 col-md-9 ">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingTwo">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                IDENTIFICATION
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse p-2"
+                                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                            <div class="accordion-header">
+                                                Veuillez enregistrer l’information suivante
+                                                avant de commencer l’entretien.
+                                            </div>
+                                            <div class="accordion-body">
+                                                <form id="formIdentification" enctype="multipart/form-data" action="#">
+                                                    <ol>
+                                                        <li>
+                                                            <label for="menage"> Êtes-vous dans le bon ménage? Voici le
+                                                                numéro du ménage dans le quartier</label>
+                                                            <select name="menage" id="menage">
+                                                                <option value="Bushwira">Bushwira</option>
+                                                                <option value="Mbobero">Mbobero</option>
+                                                                <option value="Kagabi">Kagabi</option>
+                                                            </select>
+                                                        </li>
+                                                        <li>
+                                                            <label for="appliquerQuestionnaire">Combien de fois vous
+                                                                êtes-vous rendu(e) dans ce ménage pour appliquer le
+                                                                Questionnaire Femmes?</label>
+                                                            <select name="appliquerQuestionnaire"
+                                                                class="form-select shadow-none"
+                                                                id="appliquerQuestionnaire">
+                                                                <option value="1ère fois">1ère fois</option>
+                                                                <option value="2e fois">2e fois</option>
+                                                                <option value="3e fois">3e fois</option>
+                                                            </select>
+                                                        </li>
+                                                        <li>
+                                                            <div class="row">
+                                                                <div class="col-lg-5 col-md-6 col-12">
+                                                                    <label for="nameFemme" required
+                                                                        class="form-label">Nom et post-nom :</label>
+                                                                    <input type="text" name="nameFemme"
+                                                                        class="form-control shadow-none" id="nameFemme"
+                                                                        required>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-6 col-12">
+                                                                    <label for="numeroTelFemme"
+                                                                        class="form-label">Numéro de télephone :</label>
+                                                                    <input type="text" name="numeroTelFemme"
+                                                                        class="form-control shadow-none"
+                                                                        id="numeroTelFemme" required>
+                                                                </div>
+                                                                <div class="col-lg-3 col-md-12">
+                                                                    <label for="formFile">Choisir image :</label>
+                                                                    <input class="form-control shadow-none" type="file"
+                                                                        id="formFile" name="formFile">
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <label for="ageFemme" class="form-label">Quel âge avez-vous
+                                                                eu lors de votre dernier anniversaire? (15-29).</label>
+                                                            <input type="number" min="15" max="49" name="ageFemme"
+                                                                class="form-control shadow-none mx-3" id="ageFemme"
+                                                                required>
+                                                        </li>
+                                                        <li>
+                                                            <label for="scolariteFemme" class="form-label">Quel est le
+                                                                plus haut niveau d’école que vous ayez terminé :
+                                                                primaire, moyenne section, secondaire, ou plus
+                                                                élevé?</label>
+                                                            <select name="scolariteFemme"
+                                                                class="form-select shadow-none shadow-none"
+                                                                id="scolariteFemme">
+                                                                <option value="Jamais scolarisée">Jamais scolarisée
+                                                                </option>
+                                                                <option value="Primaire">Primaire</option>
+                                                                <option value="Secondaire">Secondaire</option>
+                                                                <option value="Universitaire/Supérieur">
+                                                                    Universitaire/Supérieur</option>
+                                                            </select>
+                                                        </li>
+                                                    </ol>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion pt-2" id="accordationConsentement">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingTwo">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseConsentement"
+                                                aria-expanded="false" aria-controls="collapseConsentement">
+                                                SECTION 1/ Information sur la personne
+                                                interrogée, Situation de famille et
+                                                Caractéristique
+                                                du Ménage
+                                            </button>
+                                        </h2>
+                                        <div id="collapseConsentement" class="accordion-collapse collapse p-2"
+                                            aria-labelledby="headingTwo" data-bs-parent="#accordationConsentement">
+                                            <div class="accordion-body">
+                                                <form id="formConsentement" action="#">
+                                                    <ol>
+                                                        <li>
+                                                            <label for="genreProbleme">Genre du
+                                                                probleme</label>
+                                                            <select name="genreProbleme" class="form-select shadow-none"
+                                                                id="genreProbleme">
+                                                                <option value="Financier">Financier
+                                                                </option>
+                                                                <option value="Social">Social</option>
+                                                                <option value="Culturel">Culturel
+                                                                </option>
+                                                                <option value="Grossesse">
+                                                                </option>
+                                                            </select>
+                                                        </li>
+                                                        <li>
+                                                            <label for="descriptionCasFemme">Déscription
+                                                                de la situation</label>
+                                                            <textarea required name="descriptionCasFemme"
+                                                                class="form-control" id="" cols="30"
+                                                                rows="10"></textarea>
+                                                        </li>
+                                                    </ol>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3  order-1 bg-light p-1 my-6"
+                                style="border-radius: 5px; padding: 5px 5px;">
+                                <div class="d-inline text-center">
+                                    <h5>Progression</h5>
+                                    <hr>
+                                    <div class="activity">
+                                        <ol>
+                                            <div class="activity-item d-flex">
+                                                <div class="activite-label">1</div>
+                                                <i id="progressFormIdentification"
+                                                    class='bi bi-check-circle-fill activity-badge text-primary align-self-start'></i>
+                                                <div class="activity-content">
+                                                    IDENTIFICATION
+                                                </div>
+                                            </div><!-- End activity item-->
+                                            <hr>
+                                            <div class="activity-item d-flex">
+                                                <div class="activite-label">2</div>
+                                                <i id="isProgressFormInformation"
+                                                    class='bi bi-exclamation-circle-fill activity-badge text-danger align-self-start'></i>
+                                                <div class="activity-content">
+                                                    Section 1/ Information sur la personne
+                                                    interrogée, Situation de famille et
+                                                    Caractéristique
+                                                    du Ménage
+                                                </div>
+                                            </div>
+                                            <ol>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End Full Screen Modal-->
+    </section>
+
+</main><!-- End #main -->
+
+<script>
+    $(document).ready(function () {
+        function checkFormCompletion() {
+            var isValid = true;
+            var isProgressFormIdentification = true
+            var isProgressFormInformation = true
+            // Check all required fields in formIdentification
+            $('#formIdentification').find(':input[required]').each(function () {
+                if ($(this).val() === '') {
+                    isValid = false;
+                    isProgressFormIdentification = false
+                    return false;
+                }
+            });
+
+            if (isProgressFormIdentification == false) {
+                $('#progressFormIdentification').addClass('bi bi-exclamation-circle-fill text-danger')
+                $('#progressFormIdentification').removeClass('bi bi-check-circle-fill text-primary')
+            } else {
+                $('#progressFormIdentification').addClass('bi bi-check-circle-fill text-primary')
+                $('#progressFormIdentification').removeClass('bi bi-exclamation-circle-fill text-danger')
+            }
+
+            $('#formConsentement').find(':input[required], textarea[required]').each(function () {
+                if ($(this).val() === '') {
+                    isValid = false;
+                    isProgressFormInformation = false
+                    return false;
+                }
+            });
+
+            // Enable or disable the submit button based on form validity
+            $('#submitAllForms').prop('disabled', !isValid);
+
+            if (isProgressFormInformation == false) {
+                $('#isProgressFormInformation').addClass('bi bi-exclamation-circle-fill text-danger')
+                $('#isProgressFormInformation').removeClass('bi bi-check-circle-fill text-primary')
+            } else {
+                $('#isProgressFormInformation').addClass('bi bi-check-circle-fill text-primary')
+                $('#isProgressFormInformation').removeClass('bi bi-exclamation-circle-fill text-danger')
+            }
+        }
+
+        checkFormCompletion()
+        // Attach the checkFormCompletion function to all input changes in both forms
+        $('#formIdentification :input[required], #formConsentement :input[required], #formConsentement textarea[required]').on('change keyup', function () {
+            checkFormCompletion();
+        });
+
+        $('#submitAllForms').click(function (event) {
+            event.preventDefault();
+
+            var formData = new FormData();
+
+            // Collect data from formIdentification
+            $('#formIdentification').find(':input').each(function () {
+                if (this.type === 'file') {
+                    if (this.files.length > 0) {
+                        console.log(this.name + ' ' + this.files[0])
+                        formData.append(this.name, this.files[0]);
+                    }
+                } else {
+                    formData.append(this.name, $(this).val());
+                }
+            });
+
+
+            // Collect data from formAdditional (if any)
+            $('#formConsentement').find(':input, textarea').each(function () {
+                formData.append(this.name, $(this).val());
+            });
+
+
+            // Send the AJAX request
+            $.ajax({
+                url: "{% url 'femme' %}",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    alert(response.message);
+                    $('#formIdentification')[0].reset();
+                    $('#formConsentement')[0].reset();
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            });
+        });
+    });
+
+</script>
+{% endblock %}

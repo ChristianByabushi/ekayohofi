@@ -119,7 +119,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="  assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                            <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>Luc Murhandikire</h4>
                                 <p>Nous vous devons un peu d'argent pour le financement des mamans de Kagabi mais nous
@@ -142,16 +142,16 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="{% static 'assets/img/imageNdusi.jpeg' %}"
-                        style="width: 30px; height: 35px;max-width: 30px; max-height: 35px;" alt="Profile"
+                    <img src="{{user.get_avatar_url}}"
+                        style="width: 30px; height: 35px; max-width: 30px; max-height: 35px;" alt="Profile"
                         class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-1"></span>
-                </a><!-- End Profile Iamge Icon -->
+                </a>
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Hon. Claudine Ndusi</h6>
-                        <span>Superviseur(se)</span>
+                        <h6>{{user.first_name}}</h6>
+                        <span>{{user.role}}</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -160,7 +160,7 @@
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                             <i class="bi bi-person"></i>
-                            <span>My Profile</span>
+                            <span>Mon profil</span>
                         </a>
                     </li>
 
@@ -171,7 +171,7 @@
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                             <i class="bi bi-gear"></i>
-                            <span>Commpte Reglages</span>
+                            <span>Compte Reglages</span>
                         </a>
                     </li>
                     <li>
@@ -189,11 +189,18 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>Déconnecter</span>
-                        </a>
+
+                    <li>
+
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button class="dropdown-item d-flex align-items-center">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Déconnecter</span>
+                            </button>
+                        </form>
                     </li>
+
 
                 </ul><!-- End Profile Dropdown Items -->
             </li><!-- End Profile Nav -->
@@ -204,42 +211,72 @@
 </header><!-- End Header -->
 
 <!-- ======= Sidebar ======= -->
+<style>
+    .sidebar-nav .nav-item .nav-link.active {
+        background-color: rgb(121, 102, 49);
+        color: var(--text-color);
+    }
+
+    h1,
+    h2,
+    .nav-content a.active {
+        color: rgb(121, 102, 49);
+    }
+</style>
+
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-            <a class="nav-link " href="{% url 'index' %}">
+            <a class="nav-link collapsed {% if request.resolver_match.url_name == 'index' %} active{% endif%}"
+                href="{% url 'index' %}">
                 <i class="bi bi-grid"></i>
                 <span>Tabeau de bord</span>
             </a>
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
-                href="{% url 'collectiondata' %}">
+            <a class="nav-link collapsed {% if request.resolver_match.url_name == 'femme' %}active{% endif%} 
+            {% if request.resolver_match.url_name == 'problems' %} active{% endif%} 
+            {% if request.resolver_match.url_name == 'actions' %} active{% endif%}" data-bs-target="#components-nav"
+                data-bs-toggle="collapse" href="{% url 'collectiondata' %}">
                 <i class="bi bi-menu-button-wide"></i><span>Collecte-Données</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{% url 'women'  %}">
-                        <i class="bi bi-circle"></i><span>Femmes</span>
+            <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li class="">
+                    <style>
+                        .sidebar-nav .nav-content a:hover,
+                        .sidebar-nav .nav-content a.active {
+                            color: rgb(121, 102, 49);
+                        }
+
+                        .nav-content a.active {
+                            color: rgb(121, 102, 49);
+                        }
+                    </style>
+                    <a href="{% url 'femme'  %}"
+                        class="{% if request.resolver_match.url_name == 'femme' %}active{% endif%} ">
+                        <i class="bi bi-circle"></i>Femmes
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'problems' %}"
+                        class="{%if request.resolver_match.url_name == 'problems' %} active{% endif%}">
+                        <i class="bi bi-circle"></i><span>problems</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'dons' %}">
-                        <i class="bi bi-circle"></i><span>Dons</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'crimes' %}">
-                        <i class="bi bi-circle"></i><span>Crimes</span>
+                    <a href="{% url 'actions' %}"
+                        class="{%if request.resolver_match.url_name == 'actions' %} active{% endif%}">
+                        <i class="bi bi-circle"></i><span>Actions</span>
                     </a>
                 </li>
             </ul>
         </li><!-- End Components Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{% url 'agentAmis' %}">
+            <a class="nav-link collapsed {%if request.resolver_match.url_name == 'agentAmis' %}active{% endif%}"
+                href="{% url 'agentAmis' %}">
                 <i class="bi bi-person"></i>
                 <span>Agents</span>
             </a>
@@ -248,19 +285,22 @@
         <li class="nav-heading">Interventions</li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{% url 'assistances' %}">
+            <a class="nav-link collapsed {%if request.resolver_match.url_name == 'assistances' %}active{% endif%}"
+                href="{% url 'assistances' %}">
                 <i class="bi bi-bag-fill"></i>
                 <span>Assistances</span>
             </a>
         </li><!-- End Profile Page Nav -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-contact.html">
+            <a class="nav-link collapsed {%if request.resolver_match.url_name == 'messages' %}active{% endif%}"
+                href="#">
                 <i class="bi bi-envelope"></i>
                 <span>Messagerie</span>
             </a>
         </li><!-- End Contact Page Nav -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
+            <a class="nav-link collapsed {%if request.resolver_match.url_name == 'rapports' %}active{% endif%}"
+                href="#">
                 <i class="bi bi-receipt"></i>
                 <span>Rapports</span>
             </a>
@@ -288,7 +328,7 @@
             <form id="logout-form" action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <button class="bg-white nav-link collapsed" type="submit"><i class="bi bi-box-arrow-in-left"></i>
-                    <span>Logout</span></button>
+                    <span>Déconnecter</span></button>
             </form>
             {% else %}
             <a class="nav-link collapsed" href="{% url 'login' %}">

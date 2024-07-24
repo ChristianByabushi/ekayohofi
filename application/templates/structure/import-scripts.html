@@ -8,6 +8,28 @@
 <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
 <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
 <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
-
 <!-- Template Main JS File -->
-<script src="{% static 'assets/js/main.js' %}"></script> 
+<script src="{% static 'assets/js/main.js' %}"></script>
+
+<script>
+    $(document).ready(function () {
+        // Function to format the date as 'yyyy-MM-dd'
+        function formatDate(date) {
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+            const year = date.getFullYear();
+            return `${year}-${month}-${day}`;
+        }
+
+        // Get today's date
+        const today = new Date();
+        const formattedToday = formatDate(today);
+
+        $('input[type="date"]').each(function () {
+            let dateValue = $(this).val();
+            if (!dateValue) {
+                $(this).val(formattedToday);
+            }
+        });
+    });
+</script>

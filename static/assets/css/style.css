@@ -78,7 +78,12 @@ h6 {
   font-size: 24px;
   margin-bottom: 0;
   font-weight: 600;
-  color: #444444;
+  color: rgb(121, 102, 49);;
+}
+
+.mytitles{
+  color: rgb(121, 102, 49);;
+
 }
 
 /*--------------------------------------------------------------
@@ -693,6 +698,7 @@ h6 {
   margin-bottom: 5px;
 }
 
+
 .sidebar-nav .nav-heading {
   font-size: 11px;
   text-transform: uppercase;
@@ -772,7 +778,7 @@ h6 {
 
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
-  color: #af6121;
+  color: rgb(121, 102, 49);
 }
 
 .sidebar-nav .nav-content a.active i {
