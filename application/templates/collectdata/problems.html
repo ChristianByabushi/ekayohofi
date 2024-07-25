@@ -120,16 +120,17 @@
 
             <div class="row">
                 <div class="col-12 report-problem card shadow-none mb-0 mt-0 mx-2 my-2">
+                    {% for problem_item in problemEntries%}
+
                     <hr>
                     <div class="card-body p-0 ">
                         <a class="p-0 m-0" href="#">
                             <div class="row item-problem">
-                                <div class="col-12" style="font-size: smaller;">Posté le 21/2/2022,
-                                    par : Ir. Emery Basima
+                                <div class="col-12" style="font-size: smaller;">Posté le {{problem_item.datepost}},
+                                    par : {{problem_item.user.title}} {{problem_item.user.first_name}}
                                 </div>
                                 <div class="col-12 d-flex justify-content-between">
-                                    <div class="title">La société civile déplore la persistance de
-                                        l’insécurité</div>
+                                    <div class="title">{{problem_item.}}</div>
                                     <div>Kabare-Mbobero</div>
                                 </div>
                                 <div class="col-12 mt-3">
@@ -157,87 +158,7 @@
                             </div>
                         </a>
                     </div>
-                </div>
-
-                <div class="col-12 report-problem card shadow-none mb-0 mt-0 mx-2 my-2">
-                    <hr>
-                    <div class="card-body p-0">
-                        <a class="p-0 m-0" href="#">
-                            <div class="row item-problem">
-                                <div class="col-12" style="font-size: smaller;">Posté le 21/2/2022,
-                                    par : Ir. Emery Basima
-                                </div>
-                                <div class="col-12 d-flex justify-content-between">
-                                    <div class="title">La société civile déplore la persistance de
-                                        l’insécurité</div>
-                                    <div>Kabare-Mbobero</div>
-                                </div>
-                                <div class="col-12 mt-3">
-                                    <p>
-                                        Plusieurs cas d’insécurité sont signalés ces derniers jours,
-                                        faisant des morts notamment
-                                        dans
-                                        la ville de Bukavu et dans les territoires de Kabare et
-                                        Kalehe (Sud-Kivu). <br>
-                                        Il s’agit surtout d’attaques des hommes armés qui opèrent la
-                                        nuit causant mort d’hommes
-                                        et
-                                        qui
-                                        dépouillent leurs victimes de leurs biens. Ces cas
-                                        d’insécurité deviennent fréquents et
-                                        cette
-                                        situation nécessite une réaction des autorités compétentes,
-                                        a plaidé la société civile
-                                        locale
-                                        vendredi 16 octobre... <span class="text-primary">Voir
-                                            plus</span>
-                                    </p>
-
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-12 report-problem card shadow-none mb-0 mt-0 mx-2 my-2">
-                    <hr>
-                    <div class="card-body p-0 ">
-                        <a class="p-0 m-0" href="#">
-                            <div class="row item-problem">
-                                <div class="col-12" style="font-size: smaller;">Posté le 21/2/2022,
-                                    par : Ir. Emery Basima
-                                </div>
-                                <div class="col-12 d-flex justify-content-between">
-                                    <div class="title">La société civile déplore la persistance de
-                                        l’insécurité</div>
-                                    <div>Kabare-Mbobero</div>
-                                </div>
-                                <div class="col-12 mt-3">
-                                    <p>
-                                        Plusieurs cas d’insécurité sont signalés ces derniers jours,
-                                        faisant des morts notamment
-                                        dans
-                                        la ville de Bukavu et dans les territoires de Kabare et
-                                        Kalehe (Sud-Kivu). <br>
-                                        Il s’agit surtout d’attaques des hommes armés qui opèrent la
-                                        nuit causant mort d’hommes
-                                        et
-                                        qui
-                                        dépouillent leurs victimes de leurs biens. Ces cas
-                                        d’insécurité deviennent fréquents et
-                                        cette
-                                        situation nécessite une réaction des autorités compétentes,
-                                        a plaidé la société civile
-                                        locale
-                                        vendredi 16 octobre... <span class="text-primary">Voir
-                                            plus</span>
-                                    </p>
-
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <hr>
+                    {% endfor %}
                 </div>
             </div>
             <nav aria-label="Page navigation example" class="d-flex align-center justify-content-center">
@@ -294,91 +215,82 @@
                                     <div class="accordion-body">
                                         <form id="formProblemDescription" action="#">
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-3">
-                                                    <div>
-                                                        <label for="genreProbleme">1.
-                                                            Genre du
-                                                            probleme</label>
-                                                        <select required name="genreProbleme"
-                                                            class="form-select shadow-none shadow-none"
-                                                            id="genreProbleme">
-                                                            <option value="Financier">
-                                                                Financier</option>
-                                                            <option value="Social">Social
-                                                            </option>
-                                                            <option value="Culturel">
-                                                                Culturel</option>
-                                                        </select>
-                                                    </div>
 
-                                                    <div>
-                                                        <label for="dateProblem">2.
-                                                            Quelle est la date et
-                                                            l'heure à laquelle ce
-                                                            probleme
-                                                            s'est
-                                                            produit
-                                                            ?</label>
-                                                        <input required type="date" class="form-control"
-                                                            style="width: 140px;" name="dateProblem" id="dateProblem">
-                                                        <input required type="time" name="dateProblemTime"
-                                                            id="dateProblemTime" class="form-control">
+                                                <div class="col-lg-4 col-md-3">
+                                                    <label for="genreProbleme">1. Genre du probleme</label>
+                                                    <select required name="genreProbleme"
+                                                        class="form-select shadow-none" id="genreProbleme">
+                                                        <option value="Financier">Financier</option>
+                                                        <option value="Social">Social</option>
+                                                        <option value="Culturel">Culturel</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6 col-md-3">
+                                                    <label for="genreProbleme">Titre probleme</label>
+                                                    <input type="text" name="titreProbleme" id="titreProbleme">
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-9">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <label for="dateProblem">2. Quelle est la date et l'heure à
+                                                                laquelle ce problème s'est produit ?</label>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <input required type="date" class="form-control"
+                                                                style="width: 140px;" name="dateProblem"
+                                                                id="dateProblem">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <input required type="time" name="dateProblemTime"
+                                                                id="dateProblemTime" class="form-control">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-8 col-md-9">
-                                                    <label for="descriptionCasProblem">3.
-                                                        Déscription du
+
+                                                <div class="col-lg-6 col-md-12">
+                                                    <label for="anticipationAide">4. Quelle serait la solution
+                                                        envisageable ?</label>
+                                                    <textarea required name="anticipationAide"
+                                                        class="form-control shadow-none" id="anticipationAide" cols="5"
+                                                        rows="6"></textarea>
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-12">
+                                                    <label for="descriptionCasProblem">3. Déscription du
                                                         probleme</label>
                                                     <textarea required name="descriptionCasProblem"
                                                         class="form-control shadow-none" id="descriptionCasProblem"
-                                                        cols="10" rows="6"></textarea>
+                                                        cols="5" rows="6"></textarea>
                                                 </div>
-                                                <div class="col-12 ">
+
+                                                <div class="col-12">
                                                     <div class="row">
                                                         <div class="col-sm-5 col-12">
-                                                            <label for="provinceCasProblem">Selectionner
-                                                                la contrée
+                                                            <label for="provinceCasProblem">Selectionner la contrée
                                                                 concernée</label>
-
                                                             <select required name="provinceCasProblem"
                                                                 class="form-select shadow-none" id="provinceCasProblem">
-                                                                <option value="">
-                                                                    Bukavu</option>
-                                                                <option value="">
-                                                                    Kabare</option>
-                                                                <option value="">
-                                                                    Walungu</option>
-                                                                <option value="">
-                                                                    Fizi</option>
-                                                                <option value="">
-                                                                    Mwenga</option>
+                                                                <option value="Bukavu">Bukavu</option>
+                                                                <option value="Kabare">Kabare</option>
+                                                                <option value="Walungu">Walungu</option>
+                                                                <option value="Fizi">Fizi</option>
+                                                                <option value="Mwenga">Mwenga</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-7 col-12">
-                                                            <label for="precisionEndroitProblem">Décrivez
-                                                                l'adresse claire du
-                                                                lieu
-                                                                de la scène</label>
-                                                            <input name="precisionEndroitProblem" required type="text"
+                                                            <label for="precisionEndroitProblem">Décrivez l'adresse
+                                                                claire du
+                                                                lieu de la scène</label>
+                                                            <input required name="precisionEndroitProblem" type="text"
                                                                 id="precisionEndroitProblem"
                                                                 class="form-control shadow-none">
                                                         </div>
                                                     </div>
-
                                                 </div>
-
-                                                <div class="col-lg-12">
-                                                    <label for="anticipationAide">4.
-                                                        Quelle serait la solution
-                                                        envisageable
-                                                        ?</label>
-                                                    <textarea required name="anticipationAide"
-                                                        class="form-control shadow-none" id="anticipationAide" cols="5"
-                                                        rows="10"></textarea>
-                                                </div>
-
                                             </div>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -419,7 +331,7 @@
                                                         dernier?</label>
                                                     <textarea required class="form-control shadow-none"
                                                         name="appliquerQuestionnaire" id="appliquerQuestionnaire"
-                                                        cols="10" rows="10"> </textarea>
+                                                        cols="10" rows="10"></textarea>
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="presumesActeurs">3.
@@ -427,8 +339,8 @@
                                                         auteurs de ce
                                                         problèmes</label>
                                                     <textarea required class="form-control shadow-none"
-                                                        name="presumesActeurs" id="presumesActeurs" cols="10" rows="10">
-                              </textarea>
+                                                        name="presumesActeurs" id="presumesActeurs" cols="10"
+                                                        rows="10"></textarea>
                                                 </div>
                                             </div>
                                         </form>
@@ -461,8 +373,8 @@
                                                         victime(s) de ce
                                                         problème?</label>
                                                     <textarea required class="form-control shadow-none"
-                                                        name="problemVictiomes" id="problemVictiomes" cols="20"
-                                                        rows="10"> </textarea>
+                                                        name="problemVictiomes" id="problemVictiomes" cols="10"
+                                                        rows="6"></textarea>
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="consequencesProblemes">Quels
@@ -471,8 +383,8 @@
                                                         victime ou soit sur le lieu
                                                         ?</label>
                                                     <textarea required name="consequencesProblemes" class="form-control"
-                                                        id="consequencesProblemes" cols="10" rows="10">
-                          </textarea>
+                                                        id="consequencesProblemes" cols="10" rows="6"></textarea>
+
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="">Si vous avez des
@@ -513,7 +425,6 @@
                                     </div><!-- End activity item-->
                                     <hr>
                                     <div class="activity-item d-flex">
-                                        <div class="activite-label">3</div>
                                         <i id="progressFormVictimesProbleme"
                                             class='bi bi-exclamation-circle-fill activity-badge text-danger align-self-start'></i>
                                         <div class="activity-content">
@@ -521,7 +432,6 @@
                                         </div>
                                     </div>
                                     <ol>
-
                             </div>
                         </div>
                     </div>
@@ -539,7 +449,7 @@
             var isProgressFormActeurProbleme = true;
             var isProgressFormVictimesProbleme = true;
 
-            // Check all required fields in formProblemDescription
+            // Check all required fields in formProblemDescription 
             $('#formProblemDescription').find(':input[required], textarea[required]').each(function () {
                 if ($(this).val() === '') {
                     isValid = false;
@@ -574,8 +484,9 @@
             }
 
             // Check all required fields in formVictimesProbleme
-            $('#formVictimesProbleme').find(':input[required], textarea[required]').each(function () {
+            $('#formVictimesProbleme').find('textarea[required]').each(function () {
                 if ($(this).val() === '') {
+                    console.log(this.name + ' :' + ($(this).val()))
                     isValid = false;
                     isProgressFormVictimesProbleme = false;
                     return false;
@@ -606,8 +517,16 @@
 
             var formData = new FormData();
 
-            // Collect data from formProblemDescription
-            $('#formProblemDescription').find(':input').each(function () {
+
+            $('#formProblemDescription').find(':input, textarea').each(function () {
+                formData.append(this.name, $(this).val());
+            });
+
+            $('#formActeurProbleme').find(':input, textarea').each(function () {
+                formData.append(this.name, $(this).val());
+            });
+
+            $('#formVictimesProbleme').find(':input, textarea').each(function () {
                 if (this.type === 'file') {
                     if (this.files.length > 0) {
                         formData.append(this.name, this.files[0]);
@@ -615,16 +534,6 @@
                 } else {
                     formData.append(this.name, $(this).val());
                 }
-            });
-
-            // Collect data from formActeurProbleme
-            $('#formActeurProbleme').find(':input, textarea').each(function () {
-                formData.append(this.name, $(this).val());
-            });
-
-            // Collect data from formVictimesProbleme
-            $('#formVictimesProbleme').find(':input, textarea').each(function () {
-                formData.append(this.name, $(this).val());
             });
 
             // Send the AJAX request

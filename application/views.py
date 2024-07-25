@@ -177,15 +177,31 @@ def problems(request):
             consequences_problemes=consequences_problemes,
             images_preuves_probleme=images_preuves_probleme,
         )
-        print(request.POST)
-        #problemData.save()
-
+        problemData.save()
         return JsonResponse({'message': 'Informations sur le problème créé avec succès.'}, status=201)
     else:
+        selected_user_id = request.GET.get('userCollector')
+        selected_user_object = None
+        if request.user.groups.filter(name='collecter').exists():
+            entries = Problem.objects.filter(user=request.user)
+            # if the user is not a collector
+        else:
+            entries = Problem.objects.all()
+            if selected_user_id:
+                entries = entries.filter(user_id=selected_user_id)
+                selected_user_object = UserProfile.objects.get(
+                    pk=selected_user_id)
+
         is_supervisor = request.user.groups.filter(name='supervisor').exists()
+
+        paginator = Paginator(entries, 5)
+        page_number = request.GET.get('page')
+        problem_entries = paginator.get_page(page_number)
         context = {
+            'problemEntries': problem_entries,
+            'Allusers': UserProfile.objects.all(),
             'is_supervisor': is_supervisor,
-            'Allusers': UserProfile.objects.all()
+            'selected_user_object': selected_user_object
         }
         return render(request, 'collectdata/problems.html', context)
 

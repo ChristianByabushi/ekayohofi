@@ -107,7 +107,9 @@ class Problem(models.Model):
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     genre_probleme = models.CharField(max_length=20, choices=GENRE_CHOICES)
     date_probleme = models.DateField()
-    time_probleme = models.TimeField()
+    date_post = models.DateField(auto_created=True)
+    time_probleme = models.TimeField() 
+    titreProbleme = models.TimeField(null=False) 
     description_cas_probleme = models.TextField()
     province_cas_probleme = models.CharField(
         max_length=20, choices=PROVINCE_CHOICES)
@@ -122,7 +124,7 @@ class Problem(models.Model):
         upload_to='problem_images/', blank=True, null=True)
 
     def __str__(self):
-        return self.genre_probleme
+        return self.description_cas_probleme
 
     def get_image_url(self):
         if self.images_preuves_probleme:

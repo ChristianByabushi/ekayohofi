@@ -469,7 +469,7 @@
             var isProgressFormIdentification = true
             var isProgressFormInformation = true
             // Check all required fields in formIdentification
-            $('#formIdentification').find(':input[required]').each(function () {
+            $('#formIdentification').find(':input').each(function () {
                 if ($(this).val() === '') {
                     isValid = false;
                     isProgressFormIdentification = false

@@ -5,3 +5,4 @@ from .models import *
 
 admin.site.register(UserProfile)
 admin.site.register(Femme)
+admin.site.register(Problem)
