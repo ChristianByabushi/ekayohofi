@@ -28,27 +28,24 @@
         </div>
         <div class=" shadow-none">
             <div class="row mt-2">
-                <div class="col-lg-1 col-md-4 col-sm-2 col-1 mx-0">
-                    <button type="button" style="background-color: inherit;" class="" data-bs-toggle="modal"
-                        data-bs-target="#addProblemModal"><i class="bi bi-plus-circle-fill" style="font-size: 30px;">
+                <div class="col-lg-1 col-md-4 col-sm-1 col-1 mx-0">
+                    <button type="button" class="" data-bs-toggle="modal" data-bs-target="#addProblemModal"><i
+                            class="bi bi-plus-circle-fill logobtnpost" style="font-size: 30px; background-color: none;">
                         </i></button>
                 </div>
-                <div class="col-lg-4 d-flex col-md-8 col-sm-9 col-8  my-2">
-                    <div class="row d-flex">
-                        <div class="col-sm-6 col-12 d-flex">
-                            <label class="d-inline m-2" for="caseWomenTo">Du</label>
+                
 
-                            <input class=" gap-0 form-control shadow-none" type="date" id="caseWomenFrom">
-                            </input>
-                        </div>
-                        <div class="col-sm-6 col-12 d-flex">
-                            <label class="d-inline m-2" for="caseWomenTo">Au</label>
-                            <input class="m-0 gap-0 form-control shadow-none small" type="date" id="caseWomenTo">
-                            </input>
-                        </div>
+                <div class="col-lg-4 col-md-8 col-sm-7 col-10 m-t-3 mx-sm-0 mx-1">
+                    <div class="d-flex gap-2">
+                        <span class="mt-2">Du</span>
+                        <input class="gap-0 form-control shadow-none small" type="date" id="caseWomenFrom"></input>
+                        <span class="mt-2"> au </span>
+                        <input class="m-0 gap-0 form-control shadow-none small" type="date" id="caseWomenTo">
+                        </input>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 mt-sm-2 col-sm-6 col-6 ">
+
+                <div class="col-lg-2 col-sm-4   col-6 ">
                     <select class="form-select shadow-none" aria-label="Default select example">
                         <option selected>Aujourdhui</option>
                         <option value="2">Jour</option>
@@ -58,7 +55,7 @@
                     </select>
                 </div>
                 {% if is_supervisor %}
-                <div class="col-lg-3 col-6 pb-1 mt-sm-2 text-dark">
+                <div class="col-lg-3 col-6 pb-1 mt-lg-0 mt-sm-2 text-dark">
                     <select class="form-select shadow-none" name="userCollector" id="userCollector"
                         onchange="updateProblemList()">
                         <option value="">Select. Collecteur</option>
@@ -80,7 +77,7 @@
                     }
                 </script>
 
-                <div class="col-lg-2 col-md-6 col-sm-6 col-6 mt-sm-2">
+                <div class="col-lg-2 col-md-6 col-sm-6 col-6 mt-lg-0 mt-sm-2">
                     <select class="form-select shadow-none" aria-label="Default select example">
                         <option selected>Select. Axe</option>
                         <option value="6">Sud-Kivu</option>
@@ -119,57 +116,195 @@
             </style>
 
             <div class="row">
+                {% if selected_user_object %}
+                <h5 class="mytitles text-center">Données collectées par {{selected_user_object.title}}
+                    {{selected_user_object.first_name}}</h5>
+                {% endif %}
                 <div class="col-12 report-problem card shadow-none mb-0 mt-0 mx-2 my-2">
                     {% for problem_item in problemEntries%}
-
                     <hr>
                     <div class="card-body p-0 ">
-                        <a class="p-0 m-0" href="#">
-                            <div class="row item-problem">
-                                <div class="col-12" style="font-size: smaller;">Posté le {{problem_item.datepost}},
-                                    par : {{problem_item.user.title}} {{problem_item.user.first_name}}
+                        <a class="p-0 m-0" href="#" data-bs-toggle="offcanvas"
+                            data-bs-target="#showDetailAction{{ problem_item.id }}"
+                            aria-controls="showDetailAction{{ problem_item.id }}" style="color: black;"> <span
+                                class="voir-details">
+                                <div class="row item-problem">
+                                    <div class="col-12" style="font-size: smaller;">Posté le {{problem_item.date_post}},
+                                        par : {{problem_item.user.title}} {{problem_item.user.first_name}}
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-between">
+                                        <div class="title">{{problem_item.titreProbleme}}</div>
+                                        <div>{{problem_item.precision_endroit_probleme}}</div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <p>
+                                            {{problem_item.description_cas_probleme}}
+                                            <span class="text-primary">Voir
+                                                plus</span>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="col-12 d-flex justify-content-between">
-                                    <div class="title">{{problem_item.}}</div>
-                                    <div>Kabare-Mbobero</div>
-                                </div>
-                                <div class="col-12 mt-3">
-                                    <p>
-                                        Plusieurs cas d’insécurité sont signalés ces derniers jours,
-                                        faisant des morts notamment
-                                        dans
-                                        la ville de Bukavu et dans les territoires de Kabare et
-                                        Kalehe (Sud-Kivu). <br>
-                                        Il s’agit surtout d’attaques des hommes armés qui opèrent la
-                                        nuit causant mort d’hommes
-                                        et
-                                        qui
-                                        dépouillent leurs victimes de leurs biens. Ces cas
-                                        d’insécurité deviennent fréquents et
-                                        cette
-                                        situation nécessite une réaction des autorités compétentes,
-                                        a plaidé la société civile
-                                        locale
-                                        vendredi 16 octobre... <span class="text-primary">Voir
-                                            plus</span>
-                                    </p>
+                        </a>
+                    </div>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="showDetailAction{{ problem_item.id }}"
+                        aria-labelledby="offcanvasRightLabel{{ problem_item.id }}">
+                        <div class="offcanvas-header">
+                            <h5 id="offcanvasRightLabel{{ problem_item.id }}" class="mytitles">Details sur le problème
+                            </h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
 
+                        <div class="offcanvas-body text-dark" style="text-align: justify;">
+                            <div class="card w-100 m-0 p-0">
+                                <div class="card-header mytitles">
+
+                                    <div>
+                                        <span class="mytitles">
+                                            Titre :
+                                        </span>
+                                        <span class="text-dark">
+                                            {{problem_item.titreProbleme}}
+                                        </span>
+                                    </div>
+                                    <div> <span class="mytitles">Genre:</span> <span class="small text-dark">
+                                            {{problem_item.genre_probleme}}</span></div>
+                                    <div> <span class="mytitles"> Date-heure-probleme :</span> <span
+                                            class="small text-dark">
+                                            {{problem_item.date_post}} {{problem_item.time_probleme}} </span></div>
+                                </div>
+                                <div class="card-body">
+                                    <img src="{{ problem_item.get_image_url }}"
+                                        class="card-img-top collectDataImageDesc"
+                                        alt="Image of {{ problem_item.titreProbleme }}">
+                                    <div class="card-text">
+                                        <div class="row mb-2">
+                                            <div class="col-12 mt-2">
+                                                <div>
+                                                    <span class="mytitles">Description :</span>
+                                                </div>
+                                                <div>
+                                                    {{ problem_item.description_cas_probleme }}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-2">
+                                                <div>
+                                                    <span class="mytitles">Solution envisageable</span>
+                                                </div>
+                                                <div>
+                                                    {{ problem_item.anticipation_aide }}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-2">
+                                                <div class="text-center">
+                                                    <span class="mytitles">Auteurs</span>
+                                                </div>
+                                                <div> <span class="mytitles">Causes :</span>
+                                                    {{ problem_item.acteur_cause_probleme }}
+                                                </div>
+                                                <div><span class="mytitles"> Acteurs :</span>
+                                                    {{ problem_item.presumes_acteurs }}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-2">
+                                                <div>
+                                                    <span class="mytitles">Dommages :</span>
+                                                </div>
+                                                <div>
+                                                    {{ problem_item.appliquer_questionnaire }}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 mt-2">
+                                                <div>
+                                                    <span class="mytitles">Solution envisageable :</span>
+                                                    <div> <span class="text-dark">
+                                                            {{ problem_item.anticipation_aide }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div>
+                                                <span class="mytitles">Consequences
+                                                    :</span>
+                                            </div>
+                                            <span class="text-dark">{{ problem_item.consequences_problemes }}</span>
+                                        </div>
+                                        <div class="col-12">
+                                            <div>
+                                                <span class="mytitles">Province:</span> <span class="text-dark">{{
+                                                    problem_item.province_cas_probleme }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <span class="mytitles">Lieu precis:</span>
+                                            <span class="text-dark">{{ problem_item.precision_endroit_probleme }}</span>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="m-2">
+                                    Collecte réalisé par : <span class="mytitles"> {{ user.title }} {{ user.first_name
+                                        }}</span>
                                 </div>
                             </div>
-                        </a>
+
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
             </div>
-            <nav aria-label="Page navigation example" class="d-flex align-center justify-content-center">
+
+
+
+            <nav aria-label="Page navigation example" class="d-flex align-center justify-content-center mt-3">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    {% if problemEntries.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ problemEntries.previous_page_number }}"
+                            aria-label="Previous">
+                            <span aria-hidden="true">&laquo; Previous</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-hidden="true">&laquo; Previous</span>
+                    </li>
+                    {% endif %}
+
+                    {% for num in problemEntries.paginator.page_range %}
+                    {% if problemEntries.number == num %}
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                    {% elif num > problemEntries.number|add:'-3' and num < problemEntries.number|add:'3' %} <li
+                        class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if problemEntries.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ problemEntries.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">Next &raquo;</span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link" aria-hidden="true">Next &raquo;</span>
+                        </li>
+                        {% endif %}
                 </ul>
             </nav><!-- End Basic Pagination -->
+
         </div>
         <section>
 
@@ -227,7 +362,8 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-3">
                                                     <label for="genreProbleme">Titre probleme</label>
-                                                    <input type="text" name="titreProbleme" id="titreProbleme">
+                                                    <input type="text" name="titreProbleme" id="titreProbleme" required
+                                                        class="form-control shadow-none">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-9">
@@ -548,6 +684,7 @@
                     $('#formProblemDescription')[0].reset();
                     $('#formActeurProbleme')[0].reset();
                     $('#formVictimesProbleme')[0].reset();
+                    checkFormCompletion()
                 },
                 error: function (xhr, status, error) {
                     alert(xhr.responseText);

@@ -27,7 +27,7 @@ def handleWomen(request):
 
 @login_required
 def actions(request):
-    return render(request, 'collectdata/index.html')
+    return render(request, 'collectdata/actions.html')
 
 
 @csrf_exempt
@@ -149,6 +149,7 @@ def problems(request):
         genre_probleme = request.POST.get('genreProbleme')
         date_probleme = request.POST.get('dateProblem')
         time_probleme = request.POST.get('dateProblemTime')
+        titreProbleme = request.POST.get('titreProbleme')
         description_cas_probleme = request.POST.get('descriptionCasProblem')
         province_cas_probleme = request.POST.get('provinceCasProblem')
         precision_endroit_probleme = request.POST.get(
@@ -164,7 +165,8 @@ def problems(request):
         problemData = Problem(
             user=request.user,
             genre_probleme=genre_probleme,
-            date_probleme=date_probleme,
+            date_probleme=date_probleme, 
+            titreProbleme=titreProbleme,
             time_probleme=time_probleme,
             description_cas_probleme=description_cas_probleme,
             province_cas_probleme=province_cas_probleme,
@@ -176,7 +178,7 @@ def problems(request):
             problem_victiomes=problem_victiomes,
             consequences_problemes=consequences_problemes,
             images_preuves_probleme=images_preuves_probleme,
-        )
+        ) 
         problemData.save()
         return JsonResponse({'message': 'Informations sur le problème créé avec succès.'}, status=201)
     else:
@@ -204,7 +206,6 @@ def problems(request):
             'selected_user_object': selected_user_object
         }
         return render(request, 'collectdata/problems.html', context)
-
 
 User = get_user_model()
 

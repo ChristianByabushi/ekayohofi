@@ -16,30 +16,27 @@
                 <h2 class="bold">Femmes</h2>
             </div>
         </div>
-        <div class="header-femme-content">
+        <div class="header-femme-content bg-white p-1">
             <div class="row pt-3">
-                <div class="col-lg-1 col-md-4 col-sm-3 col-2">
+                <div class="col-lg-1 col-md-4 col-sm-1 col-1 mx-0">
                     <button type="button" style=" border: none; background-color:inherit" class=""
-                        data-bs-toggle="modal" data-bs-target="#addCaseWomenModal"><i class="bi bi-plus-circle-fill"
-                            style="font-size: 30px;">
+                        data-bs-toggle="modal" data-bs-target="#addCaseWomenModal"><i
+                            class="bi bi-plus-circle-fill logobtnpost" style="font-size: 30px;">
                         </i></button>
                 </div>
-                <div class="col-lg-4 d-flex col-md-8 col-sm-9 col-8  my-2">
-                    <div class="row d-flex">
-                        <div class="col-sm-6 col-12 d-flex">
-                            <label class="d-inline m-2" for="caseWomenTo">Du</label>
+                <div class="col-lg-4 col-sm-7 col-11 m-t-3 mx-sm-0 mx-1">
+                    <div class="d-flex gap-1">
+                        <span class="mt-2">Du</span>
+                        <input class="gap-0 form-control shadow-none" type="date" id="caseWomenFrom"></input>
+                        <span class="mt-2"> au </span>
 
-                            <input class=" gap-0 form-control shadow-none" type="date" id="caseWomenFrom">
-                            </input>
-                        </div>
-                        <div class="col-sm-6 col-12 d-flex">
-                            <label class="d-inline m-2" for="caseWomenTo">Au</label>
-                            <input class="m-0 gap-0 form-control shadow-none small" type="date" id="caseWomenTo">
-                            </input>
-                        </div>
+                        <input class="m-0 gap-0 form-control shadow-none small" type="date" id="caseWomenTo">
+                        </input>
                     </div>
+
                 </div>
-                <div class="col-lg-2 col-md-6 mt-sm-2 col-sm-6 col-6 ">
+
+                <div class="col-lg-2 col-sm-4   col-6 ">
                     <select class="form-select shadow-none" aria-label="Default select example">
                         <option selected>Aujourdhui</option>
                         <option value="2">Jour</option>
@@ -49,9 +46,9 @@
                     </select>
                 </div>
                 {% if is_supervisor %}
-                <div class="col-lg-3 col-6 pb-1 mt-sm-2 text-dark">
+                <div class="col-lg-3 col-6 pb-1 mt-lg-0 mt-sm-2 text-dark">
                     <select class="form-select shadow-none" name="userCollector" id="userCollector"
-                        onchange="updateFemmesList()">
+                        onchange="updateProblemList()">
                         <option value="">Select. Collecteur</option>
                         <option value="">Tous les collecteurs</option>
                         {% for userCollecteur in Allusers %}
@@ -71,7 +68,7 @@
                     }
                 </script>
 
-                <div class="col-lg-2 col-md-6 col-sm-6 col-6 mt-sm-2">
+                <div class="col-lg-2 col-md-6 mt-lg-0 col-sm-6 col-6 mt-sm-2">
                     <select class="form-select shadow-none" aria-label="Default select example">
                         <option selected>Select. Axe</option>
                         <option value="6">Sud-Kivu</option>
@@ -90,24 +87,6 @@
                     .report-case.card:hover {
                         color: blue;
                     }
-
-                    .femmeImage {
-                        padding: 5px 5px;
-                        width: 100%;
-                        max-width: 100%;
-                        max-height: 250px;
-                        height: 250px;
-                    }
-
-                    @media (max-width: 768px) {
-                        .femmeImage {
-                            padding: 5px 5px;
-                            width: 100%;
-                            max-width: 100%;
-                            max-height: 350px;
-                            height: 350px;
-                        }
-                    }
                 </style>
             </div>
             <div class="row mt-2 mr-0">
@@ -120,7 +99,7 @@
                 {% for item in femmesEntries %}
                 <div class="col-lg-4 col-md-6 col-sm-12 col-12">
                     <div class="shadow-none card">
-                        <img src="{{ item.get_image_url }}" class="card-img-top femmeImage"
+                        <img src="{{ item.get_image_url }}" class="card-img-top collectDataImageDesc"
                             alt="Image of {{ item.titleCase }}">
                         <div class="card-body">
                             <h5 class="card-text">{{ item.titleCase }}</h5>
@@ -163,7 +142,7 @@
                                     <div>Cas:<span class="small"> {{item.name_femme}}</span></div>
                                 </div>
                                 <div class="card-body">
-                                    <img src="{{ item.get_image_url }}" class="card-img-top femmeImage"
+                                    <img src="{{ item.get_image_url }}" class="card-img-top collectDataImageDesc"
                                         alt="Image of {{ item.titleCase }}">
                                     <div class="card-text">
                                         {{ item.descriptionCasFemme }}

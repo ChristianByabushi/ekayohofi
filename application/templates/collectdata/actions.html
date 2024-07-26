@@ -1,3 +1,6 @@
+{% extends "../structure/base.html" %}
+{% block content %}
+
 <style>
     #bordered-justified-action .card a {
         --main-color: hsl(28, 79%, 68%);
@@ -7,205 +10,260 @@
         padding: 5px 5px;
         min-height: 200px;
     }
+
+    .cases-table img {
+        max-width: 220px;
+        min-height: 100px;
+        border-radius: 5px;
+    }
+
+    .cases-table tbody {
+        width: 100%;
+        text-align: justify;
+        margin: 0px auto;
+    }
+
+    .cases-table tbody tr {
+        border-bottom: 3px solid beige;
+        border-top: 4px solid beige;
+    }
+
+    .cases-table thead tr {
+        background-color: rgb(121, 102, 49);
+        color: white;
+    }
 </style>
 
-
-<div class="tab-pane fade overflow-scroll {% if request.resolver_match.url_name == 'actions' %}show active{% endif %} "
-    id="bordered-justified-action" role="tabpanel" aria-labelledby="action-tab">
-    <div class="p-2 pt-2 bg-white">
-        <div class="card top-selling overflow-auto">
-            <div class="filter">
-                <button type="button" data-bs-toggle="modal" data-bs-target="#largeModalAction"
-                    style="margin-right: 20px;  background-color: white; border: none;" class="" data-bs-toggle="modal"
-                    data-bs-target=""><i class="bi bi-plus-circle-fill" style="font-size: 30px;"> </i></button>
-
-                <div class="modal fade" id="largeModalAction" tabindex="-1">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Ajouter une action</h5>
-
-                            </div>
-                            <div class="modal-body">
-                                <form action="">
-                                    <div class="row">
-                                        <input type="text" class="form-text">
-                                    </div>
-
-                                </form>
-                            </div>
-                            <style>
-                                .modal-footer.action .btn:hover {
-                                    color: white;
-                                    background-color: rgb(190, 173, 139);
-                                }
-                            </style>
-                            <div class="modal-footer action">
-                                <button type="button" class="btn" data-bs-dismiss="modal">Annuler</button>
-                                <button type="button" class="btn">Confirmer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End action Modal-->
-
-
-
-
-
-
-
-
-
-                <!-- Add a action -->
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Actions <span>| Aujourdhui</span></h5>
-
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 p-1">
-                        <label for="dateProblemFrom" class="">Du</label>
-                        <input type="date" id="dateProblemFrom"> </input>
-                        <label for="dateProblemTo">au</label>
-                        <input type="date" id="dateProblemTo"> </input>
-                    </div>
-                    <div class="col-md-3 col-6 p-1">
-                        <select class="form-select shadow-none shadow-none" aria-label="Default select example">
-                            <option selected>Type de Cas</option>
-                            <option value="1">Femmes</option>
-                            <option value="2">Crimes</option>
-                            <option value="2">Dons</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 col-6 p-1">
-                        <select class="form-select shadow-none shadow-none" aria-label="Default select example">
-                            <option selected>Filter</option>
-                            <option value="1">Aujourdhui</option>
-                            <option value="2">Mois</option>
-                            <option value="2">Year</option>
-                        </select>
-                    </div>
-                    <div class="spacer">
-
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1 style="color: rgb(121, 102, 49); font-size:x-large;">Collecte des données</h1>
+    </div>
+    <div class="row d-flex align-content-center justify-content-center text-center">
+        <div class="col-12">
+            <h2 style="font-size:x-large;">Actions</h2>
+        </div>
+    </div>
+    <div class="card shadow-none ">
+        <div class="card-body bg-white" style="overflow-x: scroll;">
+            <div class="row">
+                <div class="col-md-2 col-2">
+                    <div class="filter">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#largeModalAction"
+                            style="margin-right: 20px;  background-color: white; border: none;" class=""
+                            data-bs-toggle="modal" data-bs-target=""><i class="bi bi-plus-circle-fill logobtnpost"
+                                style="font-size: 30px;"> </i></button>
                     </div>
                 </div>
-                <style>
-                    .cases-table img {
-                        max-width: 220px;
-                        min-height: 100px;
-                        border-radius: 5px;
-                    }
+                <div class="col-md-4 col-10">
+                    <div class="d-flex gap-2 mt-sm-1">
+                        <span class="mt-2">Du</span>
+                        <input class="gap-0 form-control shadow-none small" type="date" id="dateActionsFrom"></input>
+                        <span class="mt-2"> au </span>
+                        <input class="m-0 gap-0 form-control shadow-none small" type="date" id="dateActionsTo">
+                        </input>
+                    </div>
 
-                    .cases-table tbody {
-                        width: 100%;
-                        text-align: justify;
-                        margin: 0px auto;
-                    }
+                </div>
+                <div class="col-md-3 col-6 p-1 justify-content-end">
+                    <select class="form-select shadow-none" aria-label="Default select example">
+                        <option selected>Type de Cas</option>
+                        <option value="1">Femmes</option>
+                        <option value="2">Problemes</option>
+                        <option value="2">Dons</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-6 p-1">
+                    <select class="form-select shadow-none shadow-none" aria-label="Default select example">
+                        <option selected>Filtrer type date</option>
+                        <option value="1">Aujourdhui</option>
+                        <option value="2">Mois</option>
+                        <option value="2">Year</option>
+                    </select>
+                </div>
+            </div>
 
-                    .cases-table tbody tr {
-                        border-bottom: 3px solid beige;
-                        border-top: 4px solid beige;
-                    }
-                </style>
-                <table class="table table-borderless cases-table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Profil</th>
-                            <th scope="col">TypeAction</th>
-                            <th scope="col">Béneficiaire</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="#">#2</a></td>
-                            <th scope="row"><a href="#"><img src="assets/img/femme africaine-viol.jpg" alt=""></a></th>
-
-                            <td>Violences</td>
-                            <td><a href="#" class="text-primary">Orphelinat de katana Mwanda</a>
-                            </td>
-                            <td>
-                                <a href="#" data-bs-toggle="offcanvas" type="button" data-bs-target="#showDetailAction"
-                                    aria-controls="showDetailAction" style="color: black;">
-
-                                    <div class="offcanvas offcanvas-end" tabindex="-1" id="showDetailAction"
-                                        aria-labelledby="offcanvasRightLabel">
-                                        <div class="offcanvas-header">
-                                            <h5 id="offcanvasRightLabel">Action Details</h5>
-                                            <button type="button" class="btn-close text-reset"
-                                                data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                        </div>
-                                        <div class="offcanvas-body">
-                                            <div class="card w-100">
-                                                <div class="card-header">
-                                                    Orphelinat de katana Mwanda
+            <table class="table table-borderless cases-table mt-2">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Profil</th>
+                        <th scope="col">TypeAction</th>
+                        <th scope="col">Béneficiaire</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#">#2</a></td>
+                        <th scope="row"><a href="#"><img src="assets/img/femme africaine-viol.jpg" alt=""></a>
+                        </th>
+                        <td>Violences</td>
+                        <td><a href="#" class="text-primary">Orphelinat de katana Mwanda</a>
+                        </td>
+                        <td>
+                            <a href="#" data-bs-toggle="offcanvas" type="button" data-bs-target="#showDetailAction"
+                                aria-controls="showDetailAction" style="color: black;">
+                                <div class="offcanvas offcanvas-end" tabindex="-1" id="showDetailAction"
+                                    aria-labelledby="offcanvasRightLabel">
+                                    <div class="offcanvas-header">
+                                        <h5 id="offcanvasRightLabel">Action Details</h5>
+                                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                        <div class="card w-100">
+                                            <div class="card-header">
+                                                Orphelinat de katana Mwanda
+                                            </div>
+                                            <div class="card-body">
+                                                <img src="assets/img/femme africaine-viol.jpg" alt="">
+                                                <div class="card-text">
+                                                    Lorem ipsum dolor sit amet consectetur
+                                                    adipisicing elit. Aut, quisquam soluta!
+                                                    Ullam
+                                                    numquam
+                                                    voluptates laudantium quas error tenetur,
+                                                    sequi delectus unde asperiores,
+                                                    voluptas
+                                                    enim
+                                                    architecto reprehenderit eum itaque ducimus
+                                                    aspernatur!
                                                 </div>
-                                                <div class="card-body">
-                                                    <img src="assets/img/femme africaine-viol.jpg" alt="">
-                                                    <div class="card-text">
-                                                        Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing elit. Aut, quisquam soluta!
-                                                        Ullam
-                                                        numquam
-                                                        voluptates laudantium quas error tenetur,
-                                                        sequi delectus unde asperiores,
-                                                        voluptas
-                                                        enim
-                                                        architecto reprehenderit eum itaque ducimus
-                                                        aspernatur!
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        Type:Violences
                                                     </div>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            Type:Violences
-                                                        </div>
-                                                        <div class="col-md-6">
+                                                    <div class="col-md-6">
 
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
-                                    quisquam soluta! Ullam
-                                    numquam
-                                    voluptates laudantium quas error tenetur, sequi delectus unde
-                                    asperiores, voluptas enim
-                                    architecto reprehenderit eum itaque ducimus aspernatur!
-                                </a>
-                            </td>
-                            <td>
-                                23-12-2024
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">#2</a></td>
-                            <th scope="row"><a href="#"><img src="assets/img/imageNdusi.jpeg" alt=""></a></th>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
+                                quisquam soluta! Ullam
+                                numquam
+                                voluptates laudantium quas error tenetur, sequi delectus unde
+                                asperiores, voluptas enim
+                                architecto reprehenderit eum itaque ducimus aspernatur!
+                            </a>
+                        </td>
+                        <td>
+                            23-12-2024
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">#2</a></td>
+                        <th scope="row"><a href="#"><img src="assets/img/imageNdusi.jpeg" alt=""></a></th>
 
-                            <td>Violences</td>
-                            <td><a href="#" class="text-primary">Orphelinat de katana Mwanda</a>
-                            </td>
-                            <td>
-                                <a href="#" style="color: black;">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
-                                    quisquam soluta! Ullam
-                                    numquam
-                                    voluptates laudantium quas error tenetur, sequi delectus unde
-                                    asperiores, voluptas enim
-                                    architecto reprehenderit eum itaque ducimus aspernatur!</a>
-                            </td>
-                            <td>
-                                23-12-2024
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <td>Violences</td>
+                        <td><a href="#" class="text-primary">Orphelinat de katana Mwanda</a>
+                        </td>
+                        <td>
+                            <a href="#" style="color: black;">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
+                                quisquam soluta! Ullam
+                                numquam
+                                voluptates laudantium quas error tenetur, sequi delectus unde
+                                asperiores, voluptas enim
+                                architecto reprehenderit eum itaque ducimus aspernatur!</a>
+                        </td>
+                        <td>
+                            23-12-2024
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
+            <div class="row">
+                <div class="d-flex justify-content-end gap-2">
+                    <div class="filter">
+                        <a type="button" data-bs-toggle="dropdown"><i class="bi bi-download logobtnpost"
+                                style="font-size: 25px;"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>Télecharger</h6>
+                            </li>
+                            <li><a class="dropdown-item" href="#">PDF</a></li>
+                            <li><a class="dropdown-item" href="#">Excel</a></li>
+                            <li><a class="dropdown-item" href="#">Csv</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
-</div><!-- End Bordered Tabs Justified -->
+    </div>
+
+    <div class="modal fade" id="largeModalAction" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mytitles">Ajouter une action</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="">Béneficiaire</label>
+                                <input type="text" class="shadow-none form-control" name="beneficaireaction"
+                                    id="beneficaireaction">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Date de réalisation</label>
+                                <input type="date" class="shadow-none form-control" name="dateAction" id="dateAction">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="">Déscription</label>
+                                <textarea type="date" class="shadow-none form-control" name="descriptionAction"
+                                    id="descriptionAction"> </textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Coût estimé en ($) </label>
+                                <textarea type="text" class="shadow-none form-control" name="descriptionAction"
+                                    id="descriptionAction"> </textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Coût estimé en ($) </label>
+                                <textarea class="shadow-none form-control" name="descriptionAction"
+                                    id="descriptionAction"> </textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Type d'actions </label>
+                                <select name="" class="form-select" id="">
+                                    <option value="Infrascture">Infrascture</option>
+                                    <option value="soutien-cas-violence">Soutien cas de violence</option>
+                                    <option value="incendie">Incendie</option>
+                                    <option value="formation">Formation</option>
+                                    <option value="construction-batiment">Construction Batiment</option>
+                                    <option value="construction-route">Construction Routes</option>
+                                    <option value="autres-dons">Autres dons</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <style>
+                    .modal-footer.action .btn:hover {
+                        color: white;
+                        background-color: rgb(190, 173, 139);
+                    }
+                </style>
+                <div class="modal-footer action">
+                    <button type="button" class="btn" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- End action Modal-->
+
+</main>
+
+
+{% endblock content %}
