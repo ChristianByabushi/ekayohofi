@@ -65,11 +65,15 @@
 
                 </div>
                 <div class="col-md-3 col-6 p-1 justify-content-end">
-                    <select class="form-select shadow-none" aria-label="Default select example">
-                        <option selected>Type de Cas</option>
-                        <option value="1">Femmes</option>
-                        <option value="2">Problemes</option>
-                        <option value="2">Dons</option>
+                    <select name="" class="form-select" id="">
+                        <option value="Infrascture">Type de cas</option>
+                        <option value="Infrascture">Infrascture</option>
+                        <option value="soutien-cas-violence">Soutien cas de violence</option>
+                        <option value="incendie">Incendie</option>
+                        <option value="formation">Formation</option>
+                        <option value="construction-batiment">Construction Batiment</option>
+                        <option value="construction-route">Construction Routes</option>
+                        <option value="autres-dons">Autres dons</option>
                     </select>
                 </div>
                 <div class="col-md-3 col-6 p-1">
@@ -86,20 +90,21 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Profil</th>
+                        <th scope="col">Béneficiaire</th>
                         <th scope="col">TypeAction</th>
                         <th scope="col">Béneficiaire</th>
-                        <th scope="col">Description</th>
+                        <th scope="col">Cout estime</th>
                         <th scope="col">Date</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for itemAction in actionsEntries %}
                     <tr>
-                        <td><a href="#">#2</a></td>
-                        <th scope="row"><a href="#"><img src="assets/img/femme africaine-viol.jpg" alt=""></a>
+                        <td><a href="#">{{itemAction.id}}</a></td>
+                        <th scope="row">{{itemAction.beneficiary}}
                         </th>
-                        <td>Violences</td>
-                        <td><a href="#" class="text-primary">Orphelinat de katana Mwanda</a>
+                        <td>{{itemAction.action_type}}</td>
+                        <td>{{itemAction.cost_estimated}}
                         </td>
                         <td>
                             <a href="#" data-bs-toggle="offcanvas" type="button" data-bs-target="#showDetailAction"
@@ -111,93 +116,151 @@
                                         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                                             aria-label="Close"></button>
                                     </div>
+                                    <style>
+                                        .offcanvas-body div {
+                                            color: black;
+                                        }
+
+                                        .offcanvas-body span {
+                                            color: rgb(131, 113, 63);
+                                            font-weight: 600;
+                                        }
+                                    </style>
                                     <div class="offcanvas-body">
-                                        <div class="card w-100">
+                                        <div class="card">
                                             <div class="card-header">
-                                                Orphelinat de katana Mwanda
+                                                <span>
+                                                    {{itemAction.beneficiary}}
+                                                </span>
                                             </div>
                                             <div class="card-body">
-                                                <img src="assets/img/femme africaine-viol.jpg" alt="">
+                                                <div class="card-img-top action mt-2">
+                                                    <img id="imageActionDetails" src="{{itemAction.get_image_url}}"
+                                                        alt="">
+                                                </div>
                                                 <div class="card-text">
-                                                    Lorem ipsum dolor sit amet consectetur
-                                                    adipisicing elit. Aut, quisquam soluta!
-                                                    Ullam
-                                                    numquam
-                                                    voluptates laudantium quas error tenetur,
-                                                    sequi delectus unde asperiores,
-                                                    voluptas
-                                                    enim
-                                                    architecto reprehenderit eum itaque ducimus
-                                                    aspernatur!
+                                                    {{itemAction.description_action}}
                                                 </div>
                                             </div>
                                             <div class="card-footer">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        Type:Violences
+                                                        Type: <span>
+                                                            {{itemAction.action_type}}
+                                                        </span>
                                                     </div>
                                                     <div class="col-md-6">
-
+                                                        Cout estimé : <span>
+                                                            {{itemAction.cost_estimated}} ($)
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
-                                quisquam soluta! Ullam
-                                numquam
-                                voluptates laudantium quas error tenetur, sequi delectus unde
-                                asperiores, voluptas enim
-                                architecto reprehenderit eum itaque ducimus aspernatur!
+                                {{itemAction.decriptionSliced}}... <span style="color: blue;"> Lire plus</span>
                             </a>
                         </td>
                         <td>
-                            23-12-2024
+                            {{itemAction.date_action}}
                         </td>
                     </tr>
-                    <tr>
-                        <td><a href="#">#2</a></td>
-                        <th scope="row"><a href="#"><img src="assets/img/imageNdusi.jpeg" alt=""></a></th>
+                    {% endfor %}
 
-                        <td>Violences</td>
-                        <td><a href="#" class="text-primary">Orphelinat de katana Mwanda</a>
-                        </td>
-                        <td>
-                            <a href="#" style="color: black;">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
-                                quisquam soluta! Ullam
-                                numquam
-                                voluptates laudantium quas error tenetur, sequi delectus unde
-                                asperiores, voluptas enim
-                                architecto reprehenderit eum itaque ducimus aspernatur!</a>
-                        </td>
-                        <td>
-                            23-12-2024
-                        </td>
-                    </tr>
                 </tbody>
             </table>
+            <style>
+                .navigation.action li.page-item {
+                    color: whitesmoke;
+                    background-color: rgb(121, 102, 49);
+                    display: none;
+                }
 
-            <div class="row">
-                <div class="d-flex justify-content-end gap-2">
-                    <div class="filter">
-                        <a type="button" data-bs-toggle="dropdown"><i class="bi bi-download logobtnpost"
-                                style="font-size: 25px;"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Télecharger</h6>
+                .active>.page-link,
+                .page-link.active {
+                    z-index: 3;
+                    color: var(--bs-pagination-active-color);
+                    background-color: var(--bs-pagination-active-bg);
+                    border-color: var(--bs-pagination-active-border-color);
+                    color: white;
+                    background-color: rgb(121, 102, 49);
+                }
+            </style>
+            <div class="row d-flex">
+                <div class="col-6">
+                    <nav aria-label="Page navigation action">
+                        <ul class="pagination justify-content-center">
+                            {% if actionsEntries.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1" aria-label="First">
+                                    <span aria-hidden="true">&laquo;&laquo;</span>
+                                </a>
                             </li>
-                            <li><a class="dropdown-item" href="#">PDF</a></li>
-                            <li><a class="dropdown-item" href="#">Excel</a></li>
-                            <li><a class="dropdown-item" href="#">Csv</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ actionsEntries.previous_page_number }}"
+                                    aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link" aria-label="First">&laquo;&laquo;</span>
+                            </li>
+                            <li class="page-item disabled">
+                                <span class="page-link" aria-label="Previous">&laquo;</span>
+                            </li>
+                            {% endif %}
+
+                            {% for i in actionsEntries.paginator.page_range %}
+                            {% if actionsEntries.number == i %}
+                            <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                            {% else %}
+                            <li class="page-item"><a class="page-link " href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+
+                            {% if actionsEntries.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ actionsEntries.next_page_number }}"
+                                    aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ actionsEntries.paginator.num_pages }}"
+                                    aria-label="Last">
+                                    <span aria-hidden="true">&raquo;&raquo;</span>
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link" aria-label="Next">&raquo;</span>
+                            </li>
+                            <li class="page-item disabled">
+                                <span class="page-link" aria-label="Last">&raquo;&raquo;</span>
+                            </li>
+                            {% endif %}
                         </ul>
+                    </nav>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex justify-content-end gap-2">
+                        <div class="filter">
+                            <a type="button" data-bs-toggle="dropdown"><i class="bi bi-download logobtnpost"
+                                    style="font-size: 25px;"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Télecharger</h6>
+                                </li>
+                                <li><a class="dropdown-item" href="{% url 'actionExcelData' %}">Excel/CSV</a></li>
+                                <li><a class="dropdown-item" href="#">PDF</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
     </div>
 
@@ -205,38 +268,42 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
+                    {% if is_supervisor %}
                     <h5 class="modal-title mytitles">Ajouter une action</h5>
+
+                    {% endif %}
                 </div>
-                <div class="modal-body">
-                    <form action="">
+                <form id="actionForm">
+                    <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="">Béneficiaire</label>
-                                <input type="text" class="shadow-none form-control" name="beneficaireaction"
-                                    id="beneficaireaction">
+                                <input required type="text" class="shadow-none form-control" name="beneficiary"
+                                    id="beneficiary">
                             </div>
                             <div class="col-md-6">
                                 <label for="">Date de réalisation</label>
-                                <input type="date" class="shadow-none form-control" name="dateAction" id="dateAction">
+                                <input required type="date" class="shadow-none form-control" name="dateAction"
+                                    id="dateAction">
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-lg-6 col-12">
                                 <label for="">Déscription</label>
-                                <textarea type="date" class="shadow-none form-control" name="descriptionAction"
-                                    id="descriptionAction"> </textarea>
+                                <textarea required type="date" class="shadow-none form-control" name="descriptionAction"
+                                    id="descriptionAction"></textarea>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <label for="">Déscription</label>
+                                <input required type="file" class="shadow-none form-control" name="descriptionAction"
+                                    id="image_action"></input>
                             </div>
                             <div class="col-md-6">
                                 <label for="">Coût estimé en ($) </label>
-                                <textarea type="text" class="shadow-none form-control" name="descriptionAction"
-                                    id="descriptionAction"> </textarea>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="">Coût estimé en ($) </label>
-                                <textarea class="shadow-none form-control" name="descriptionAction"
-                                    id="descriptionAction"> </textarea>
+                                <input required class="shadow-none form-control" type="number" name="costEstimated"
+                                    id="costEstimated"> </input>
                             </div>
                             <div class="col-md-6">
                                 <label for="">Type d'actions </label>
-                                <select name="" class="form-select" id="">
+                                <select required name="actionType" class="form-select" id="actionType">
                                     <option value="Infrascture">Infrascture</option>
                                     <option value="soutien-cas-violence">Soutien cas de violence</option>
                                     <option value="incendie">Incendie</option>
@@ -247,23 +314,77 @@
                                 </select>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <style>
-                    .modal-footer.action .btn:hover {
-                        color: white;
-                        background-color: rgb(190, 173, 139);
-                    }
-                </style>
-                <div class="modal-footer action">
-                    <button type="button" class="btn" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn">Confirmer</button>
-                </div>
+                        <div class="modal-footer action mt-2">
+                            <button type="button" class="btn " data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" disabled class="btn" id="submitActionFork">Confirmer</button>
+                        </div>
+                    </div>
+                </form>
             </div>
+            <style>
+                .modal-footer.action .btn:hover {
+                    color: white;
+                    background-color: rgb(190, 173, 139);
+                }
+            </style>
+
         </div>
+    </div>
     </div><!-- End action Modal-->
 
 </main>
+
+
+<script>
+    $(document).ready(function () {
+        function checkFormCompletion() {
+            var isValid = true;
+            $('#actionForm').find(':input[required], textarea[required], select[required]').each(function () {
+
+                if ($(this).val() === '') {
+                    isValid = false;
+                    return false;
+                }
+            });
+            $('#submitActionFork').prop('disabled', !isValid);
+        }
+
+        $('#actionForm :input, #actionForm textarea, #actionForm select').on('input change', function () {
+            checkFormCompletion();
+        });
+
+        $('#actionForm').on('submit', function (e) {
+            e.preventDefault();
+
+            $('#actionForm').find(':input, textarea').each(function () {
+                if (this.type === 'file') {
+                    if (this.files.length > 0) {
+                        formData.append(this.name, this.files[0]);
+                    }
+                } else {
+                    formData.append(this.name, $(this).val());
+                }
+            });
+
+            $.ajax({
+                url: "{% url 'actions' %}",  // Replace with your URL or URL name
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    alert(response.message);
+                    $('#actionForm')[0].reset();
+                    $('#submitButton').prop('disabled', true);
+                },
+                error: function (xhr, status, error) {
+                    alert('An error occurred: ' + xhr.responseText);
+                }
+            });
+        });
+
+        // Initial check
+        checkFormCompletion();
+    });
+</script>
 
 
 {% endblock content %}

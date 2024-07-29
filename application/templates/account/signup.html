@@ -40,6 +40,12 @@
 
                                     <form id="signup-form" method="post" class="row g-3 needs-validation">
                                         <div class="col-12">
+                                            <label for="yourUsername" class="form-label">Nom d'utilisateur</label>
+                                            <input type="text" placeholder="Par ex: bigjo, amina12" name="yourUsername"
+                                                class="form-control" id="yourUsername" required>
+                                            <div class="invalid-feedback">SVP Entrez username nom ici</div>
+                                        </div>
+                                        <div class="col-12">
                                             <label for="yourName" class="form-label">Nom et post-nom</label>
                                             <input type="text" name="name" class="form-control" id="yourName" required>
                                             <div class="invalid-feedback">SVP Entrez votre nom ici</div>
@@ -65,7 +71,7 @@
                                                 <option value="Walungu">Walungu</option>
                                             </select>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-6">
                                             <label for="role" class="form-label">Quel est le votre role dans
                                                 l'organisation ?</label>
                                             <select class="form-select" name="role" id="role" required>
@@ -75,6 +81,18 @@
                                                 <option value="Partisan">Partisan</option>
                                             </select>
                                         </div>
+                                        <div class="col-6">
+                                            <label for="role" class="form-label">Numéro de Telephone ?</label>
+                                            <input type="text" name="email" class="form-control" id="yourPhonenumber"
+                                                required>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label for="role" class="form-label">Titre</label>
+                                            <input placeholder="Par ex : Dev, Ir, Mr" type="text" name="email"
+                                                class="form-control" id="yourTitle" required>
+                                        </div>
+
                                         <div class="col-12">
                                             <label for="yourEmail" class="form-label">Adresse Mail</label>
                                             <input type="email" name="email" class="form-control" id="yourEmail"
@@ -173,7 +191,10 @@
                     name: $('#yourName').val(),
                     province: $('#province').val(),
                     city: $('#city').val(),
+                    phone: $('#yourPhonenumber').val(),
+                    username: $('#yourUsername').val(),
                     role: $('#role').val(),
+                    title: $('#yourTitle').val(),
                     email: $('#yourEmail').val(),
                     password: $('#yourPassword').val(),
                 };
@@ -187,13 +208,15 @@
                         'X-CSRFToken': '{{ csrf_token }}'
                     },
                     success: function (response) {
-                        $('#yourName').val('');
+                        alert(response.message);
+                        $('#yourName').val(' ');
                         $('#province').val('Sud-Kivu');
                         $('#city').val('Bukavu');
-                        $('#role').val('');
-                        $('#yourEmail').val('');
-                        $('#yourPassword').val('');
-                        alert(response.message);
+                        $('#role').val(' ');
+                        $('#yourPhonenumber').val(' ');
+                        $('#yourPassword').val(' ');
+                        $('#yourUsername').val(' ');
+                        $('#yourTitle').val(' ');
                     },
                     error: function (response) {
                         alert(response.responseJSON.message)

@@ -158,7 +158,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" href="{% url 'profile' %}">
                             <i class="bi bi-person"></i>
                             <span>Mon profil</span>
                         </a>
@@ -315,8 +315,8 @@
         </li><!-- End Components Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed {%if request.resolver_match.url_name == 'agentAmis' %}active{% endif%}"
-                href="{% url 'agentAmis' %}">
+            <a class="nav-link collapsed {%if request.resolver_match.url_name == 'utilisateurs' %}active{% endif%}"
+                href="{% url 'utilisateurs' %}">
                 <i class="bi bi-person"></i>
                 <span>Agents</span>
             </a>
@@ -361,7 +361,6 @@
                 <span>F.A.Q</span>
             </a>
         </li><!-- End F.A.Q Page Nav -->
-
 
         <li class="nav-item">
             {% if user %}

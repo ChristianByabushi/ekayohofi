@@ -1,0 +1,53 @@
+{% extends "../structure/base.html" %}
+{% block content %}
+
+
+<main id="main" class="main">
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card" style="overflow-x:scroll;">
+                    <div class="card-header">
+                        <h2>Liste des tous les utilisateurs(agents)</h2>
+                        <p class="text-black">Vous pouvez personnaliser la liste pour voir, soit par la recherche</p>
+                    </div>
+                    <div class="card-body mt-2">
+
+                        <table class="table datatable ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Profile</th>
+                                    <th scope="col">Nom Complet</th>
+                                    <th scope="col">Position</th>
+                                    <th scope="col">Province</th>
+                                    <th scope="col">Numero de Tel</th>
+                                    <th scope="col">Adresse email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for utilisateur in utilisateurs %}
+                                <tr>
+                                    <th scope="row">{{utilisateur.id}}</th>
+                                    <th scope="row"><img style="max-width: 30px;min-width: 30px; border-radius: 30px; "
+                                            src="{{utilisateur.get_avatar_url}}" alt=""></th>
+                                    <td>{{utilisateur.title}} {{utilisateur.first_name}}</td>
+                                    <td>{{utilisateur.role}}</td>
+                                    <td>{{utilisateur.province}}</td>
+                                    <td>{{utilisateur.phone}}</td>
+                                    <td>{{utilisateur.email}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

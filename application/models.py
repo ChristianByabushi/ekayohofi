@@ -28,6 +28,9 @@ class UserProfile(AbstractUser):
     province = models.CharField(max_length=50, null=False)
     city = models.CharField(max_length=50, null=False)
     role = models.CharField(max_length=50, null=False)
+    phone = models.CharField(max_length=50, null=True, default='Null')
+    adresse = models.TextField(default='Not defined') 
+    email = models.EmailField(unique=True)
 
     def __str__(self):
         return self.username
@@ -130,3 +133,34 @@ class Problem(models.Model):
         if self.images_preuves_probleme:
             return self.images_preuves_probleme.url
         return None
+
+
+class Action(models.Model):
+    BENEFICIARY_CHOICES = [
+        ('Infrascture', 'Infrascture'),
+        ('soutien-cas-violence', 'Soutien cas de violence'),
+        ('incendie', 'Incendie'),
+        ('formation', 'Formation'),
+        ('construction-batiment', 'Construction Batiment'),
+        ('construction-route', 'Construction Routes'),
+        ('autres-dons', 'Autres dons'),
+    ]
+
+    beneficiary = models.CharField(max_length=255)
+    date_action = models.DateField()
+    description_action = models.TextField()
+    cost_estimated = models.DecimalField(max_digits=10, decimal_places=2)
+    action_type = models.CharField(max_length=50, choices=BENEFICIARY_CHOICES)
+    image_actions = models.ImageField(
+        upload_to='actions/', blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.beneficiary} - {self.action_type}"
+
+    def get_image_url(self):
+        if self.image_actions:
+            return self.image_actions.url
+        return None
+
+    def decriptionSliced(self):
+        return self.description_action[:100]

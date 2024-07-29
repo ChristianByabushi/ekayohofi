@@ -11,16 +11,20 @@ urlpatterns = [
     path("assistances/", views.handleWomen, name="assistances"),
     path("collect-donnees/femmes/", views.femmes, name="femme"),
     path("faq/", views.handleWomen, name="faq"),
+    path("mon-profile/", views.profile, name="profile"),
     path("dons/", views.handleWomen, name="dons"),
     path("collect-donnees/problems/", views.problems, name="problems"),
     path("collect-donnees/actions/", views.actions, name="actions"),
+    path("collect-donnees/download/action-excel-data/",
+         views.action_download_excel, name="actionExcelData"),
     path("rapports/", views.boiteSuggestion, name="rapports"),
-    path("agents-amis-mama-ni-mama/", views.agentsAmis, name="agentAmis"),
+    path("agents-ekayehofi/", views.agents, name="utilisateurs"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("login/", views.login,
          name="login"),
     path("sign-up/", views.signup,
          name="signup"),
+
     # path("", views.messaging, name="contact-us"),
 ]
 
