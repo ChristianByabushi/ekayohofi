@@ -349,7 +349,7 @@
         <li class="nav-heading">Autres</li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{% url 'boiteSuggestion' %}">
+            <a class="nav-link collapsed {%if request.resolver_match.url_name == 'boiteSuggestion' %}active{% endif%}" href="{% url 'boiteSuggestion' %} ">
                 <i class="bi bi-box-arrow-down"></i>
                 <span>Boites a suggestion</span>
             </a>

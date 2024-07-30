@@ -75,7 +75,8 @@ def actions(request):
         actionsEntries = paginator.get_page(page_number)
 
         context = {
-            'actionsEntries': actionsEntries
+            'actionsEntries': actionsEntries,
+            'is_supervisor': request.user.groups.filter(name='supervisor').exists(),
         }
     return render(request, 'collectdata/actions.html', context)
 
@@ -207,7 +208,29 @@ def collectiondata(request):
 
 @login_required
 def boiteSuggestion(request):
-    return render(request, 'welcome/tableau-de-bord.html')
+
+    if request.method == 'POST':
+        topic = request.POST.get('topic')
+        message = request.POST.get('message')
+
+        # Check if required fields are present
+        if not (topic and message):
+            return JsonResponse({'message': 'Erreur : Tous les champs sont requis.'}, status=400)
+
+        # Save to the database
+        Sugestion.objects.create(
+            topic=topic,
+            message=message
+        )
+        return JsonResponse({'message': f'Information sur {topic} envoyée avec succès'}, status=201)
+    else:
+
+        context = {
+            'is_supervisor': request.user.groups.filter(name='supervisor').exists(),
+            'sugestions': Sugestion.objects.all()
+        }
+
+    return render(request, 'suggestion/index.html', context)
 
 
 @login_required

@@ -29,7 +29,7 @@ class UserProfile(AbstractUser):
     city = models.CharField(max_length=50, null=False)
     role = models.CharField(max_length=50, null=False)
     phone = models.CharField(max_length=50, null=True, default='Null')
-    adresse = models.TextField(default='Not defined') 
+    adresse = models.TextField(default='Not defined')
     email = models.EmailField(unique=True)
 
     def __str__(self):
@@ -91,6 +91,11 @@ class Femme(models.Model):
             return self.form_file.url
         return None
 
+
+class Sugestion(models.Model):
+    topic = models.TextField(null=False)
+    message = models.TextField(null=False)
+    
 
 class Problem(models.Model):
     GENRE_CHOICES = [

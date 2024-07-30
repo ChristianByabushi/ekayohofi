@@ -46,6 +46,7 @@
     <div class="card shadow-none ">
         <div class="card-body bg-white" style="overflow-x: scroll;">
             <div class="row">
+                {% if is_supervisor %}
                 <div class="col-md-2 col-2">
                     <div class="filter">
                         <button type="button" data-bs-toggle="modal" data-bs-target="#largeModalAction"
@@ -54,6 +55,7 @@
                                 style="font-size: 30px;"> </i></button>
                     </div>
                 </div>
+                {% endif %}
                 <div class="col-md-4 col-10">
                     <div class="d-flex gap-2 mt-sm-1">
                         <span class="mt-2">Du</span>
